@@ -9,7 +9,6 @@
       <h3>{% raw tl['WATCH_VIDEOS'] %}</h3>
       <div class="videos clearfix">
       <div class="video"><iframe src="{{media_locale['STEPS_VIDEO']}}" width="330" height="200" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p>{% raw tl['STEPS_TO_FOLLOW'] %}</p></div>
-      <div class="video"><iframe src="{{media_locale['FOOD_LOG']}}" width="330" height="200" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p>{% raw tl['LOG_FOOD']%}</p></div>
       <div class="video"><iframe src="{{media_locale['ADD_PARTICIPANT']}}" width="330" height="200" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p>{% raw tl['ADD_PARTICIPANT'] %}</p></div>
       </div>
       <br />
@@ -22,8 +21,8 @@
       <li><a href="#faq2">{% raw tl['PASSWORD_DOESNT_WORK'] %}</a></li>
       <li><a href="#faq3">{% raw tl['LOG_IN_WHAT_NOW'] %}</a></li>
       <li><a href="#faq4">{% raw tl['TAKES_SIX_MONTHS'] %}</a></li>
-      <li><a href="#faq5">Why are there 2 swabs inside the tube?</a></li>
-      <li><a href="#faq6">{% raw tl['WHY_TWO_SWABS'] %}</a></li>
+      <li><a href="#faq5">{% raw tl['WHY_TWO_SWABS'] %}</a></li>
+      <li><a href="#faq6">{% raw tl['MULTIPLE_KITS_DIFFERENT_TIMES'] %}</a></li>
       <li><a href="#faq7">{% raw tl['WHAT_FORMS'] %}</a></li>
       <li><a href="#faq8">{% raw tl['RAW_DATA'] %}</a></li>
       <li><a href="#faq9">{% raw tl['WHERE_SEND_SAMPLE'] %}</a></li>
@@ -38,7 +37,6 @@
       <li><a href="#faq18">{% raw tl['WHO_MICHAEL_POLLAN'] %}</a></li>
       <li><a href="#faq19">{% raw tl['HOW_CHANGE_GUT'] %}</a></li>
       <li><a href="#faq20">{% raw tl['ANOTHER_COPY_RESULTS'] %}</a></li>
-      <li><a href="#faq21">{% raw tl['FOOD_DIARY'] %}</a></li>
       <li><a href="#faq22">{% raw tl['CONVERT_GRAMS_CALORIES'] %}</a></li>
       <li><a href="#faq23">{% raw tl['PARTICIPATE_WITH_DIAGNOSIS'] %}</a></li>
       <li><a href="#faq24">{% raw tl['MISSING_METADATA'] %}</a></li>
@@ -53,7 +51,26 @@
       <div class="faq_content">
             <p>{% raw tl['INTRODUCTION_BEGINNING'] %}</p>
             <div class="indent_box">
-                  {% raw tl['INTRODUCTION_TEXT'] %}
+                  <h4>{% raw tl['INTRODUCTION_WHAT_IS_GUT_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_WHAT_IS_GUT'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_WHAT_IS_PROJECT_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_WHAT_IS_PROJECT'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_WHAT_IS_16S_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_WHAT_IS_16S'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_ROBOTS_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_ROBOTS'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_TREE_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_TREE'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_MICROBIOME_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_MICROBIOME'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_EAT_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_EAT'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_MICROBES_COME_FROM_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_MICROBES_COME_FROM'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_DISCOVER_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_DISCOVER'] %}</p>
+                  <h4>{% raw tl['INTRODUCTION_STORIES_HEAD'] %}</h4>
+                  <p>{% raw tl['INTRODUCTION_STORIES'] %}</p>
             </div>
       </div>
       <br>
@@ -183,12 +200,6 @@
       </div>
       <div class="separator"></div>
 
-      <h3 class="faq_header" id="faq21">{% raw tl['FOOD_DIARY'] %}</h3>
-      <div class="faq_content">
-          <p>{% raw tl['FOOD_DIARY_ANS'] %}</p>
-      </div>
-      <div class="separator"></div>
-
       <h3 class="faq_header" id="faq22">{% raw tl['CONVERT_GRAMS_CALORIES'] %}</h3>
       <div class="faq_content">
           <p>{% raw tl['CONVERT_GRAMS_CALORIES_ANS'] %}</p>
@@ -209,7 +220,16 @@
 
       <h3 class="faq_header" id="faq25">{% raw tl['HOW_PROCESS_SAMPLES'] %}</h3>
       <div class="faq_content">
-          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS'] %}
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_1'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_2'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_3'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_4'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_5'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_6'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_7'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_8'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_9'] %}</p>
+          <p>{% raw tl['HOW_PROCESS_SAMPLES_ANS_10'] %}</p>
       </div>
       <div class="separator"></div>
       <h3 class="faq_header" id="faq26">{% raw tl['NOT_A_BUSINESS'] %}</h3>

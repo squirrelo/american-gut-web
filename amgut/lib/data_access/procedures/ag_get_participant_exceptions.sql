@@ -1,7 +1,5 @@
 SET client_encoding TO 'UTF8';
 
-\set ON_ERROR_STOP ON
-
 
 CREATE OR REPLACE FUNCTION ag_get_participant_exceptions (
     ag_login_id_ uuid,
@@ -12,7 +10,7 @@ BEGIN
 
     open results_ for
         SELECT  participant_name
-        from    ag_bruce_waynes
+        from    ag_participant_exceptions
         where   ag_login_id = ag_login_id_;
     return results_;
 end;

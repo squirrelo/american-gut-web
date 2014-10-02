@@ -21,6 +21,8 @@ from amgut.handlers.participant_overview import ParticipantOverviewHandler
 from amgut.handlers.international import InternationalHandler
 from amgut.handlers.animal_survey import (AnimalSurveyHandler,
                                           CheckParticipantName)
+from amgut.handlers.human_survey import HumanSurveyHandler
+from amgut.handlers.human_survey_completed import HumanSurveyCompletedHandler
 from amgut.handlers.add_sample import (AddHumanSampleHandler,
                                        AddGeneralSampleHandler,
                                        AddAnimalSampleHandler)
@@ -34,6 +36,7 @@ from amgut.handlers.retrieve_kitid import KitIDHandler
 from amgut.handlers.forgot_password import ForgotPasswordHandler
 from amgut.handlers.add_sample_overview import AddSampleOverviewHandler
 from amgut.handlers.change_pass_verify import ChangePassVerifyHandler
+from amgut.handlers.change_password import ChangePasswordHandler
 
 define("port", default=8888, help="run on the given port", type=int)
 
@@ -65,10 +68,13 @@ class QiimeWebApplication(Application):
             (r"/authed/sample_overview/", SampleOverviewHandler),
             (r"/authed/add_sample_overview/", AddSampleOverviewHandler),
             (r"/authed/survey_main/", SurveyMainHandler),
+            (r"/authed/human_survey/", HumanSurveyHandler),
+            (r"/authed/human_survey_completed/", HumanSurveyCompletedHandler),
             (r"/authed/portal/", PortalHandler),
             (r"/authed/add_sample_human/", AddHumanSampleHandler),
             (r"/authed/add_sample_animal/", AddAnimalSampleHandler),
             (r"/authed/add_sample_general/", AddGeneralSampleHandler),
+            (r"/authed/change_password/", ChangePasswordHandler),
             (r"/faq/", FAQHandler),
             (r"/participants/(.*)", ParticipantOverviewHandler),
             (r"/international_shipping/", InternationalHandler),

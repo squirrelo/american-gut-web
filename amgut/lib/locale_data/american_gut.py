@@ -11,22 +11,30 @@ from amgut.lib.config_manager import AMGUT_CONFIG
 # -----------------------------------------------------------------------------
 
 # Any media specific localizations
+HELP_EMAIL = "info@americangut.org"
+
+_SITEBASE = '/AmericanGut'
+
 media_locale = {
-    'LOGO': '/static/img/ag_logo.jpg',
+    'SITEBASE': _SITEBASE,
+    'LOGO': _SITEBASE + '/static/img/ag_logo.jpg',
+    'ANALYTICS_ID': 'UA-55353353-1',
+    'LATITUDE': 39.83,
+    'LONGITUDE': -99.89,
+    'ZOOM': 4,
     'STEPS_VIDEO': "http://player.vimeo.com/video/63542787",
-    'FOOD_LOG': 'http://player.vimeo.com/video/63926337',
     'ADD_PARTICIPANT': 'http://player.vimeo.com/video/63931218',
-    'ADD_PARTICIPANT_IMG_1': "/static/img/add_participant.png",
-    'ADD_PARTICIPANT_IMG_MENU': "/static/img/add_participant_menu.png",
-    'LOG_SAMPLE_OPTS': "/static/img/log_sample_options.png",
-    'ADD_SAMPLE_HIGHLIGHT': "/static/img/add_sample_highlight.png",
-    'ADD_SAMPLE_OVERVIEW': "/static/img/add_sample_overview.png",
-    'FAQ_AMBIGUOUS_PASS': '/static/img/creds_example.png',
-    'SAMPLE_BARCODE': '/static/img/sample_barcode.jpg',
+    'ADD_PARTICIPANT_IMG_1': _SITEBASE + "/static/img/add_participant.png",
+    'ADD_PARTICIPANT_IMG_MENU': _SITEBASE + "/static/img/add_participant_menu.png",
+    'LOG_SAMPLE_OPTS': _SITEBASE + "/static/img/log_sample_options.png",
+    'ADD_SAMPLE_HIGHLIGHT': _SITEBASE + "/static/img/add_sample_highlight.png",
+    'ADD_SAMPLE_OVERVIEW': _SITEBASE + "/static/img/add_sample_overview.png",
+    'FAQ_AMBIGUOUS_PASS': _SITEBASE + '/static/img/creds_example.png',
+    'SAMPLE_BARCODE': _SITEBASE + '/static/img/sample_barcode.jpg',
     'SWAB_HANDLING': 'http://player.vimeo.com/video/62393487',
-    'HELP_EMAIL': 'info@americangut.org',
+    'HELP_EMAIL': HELP_EMAIL,
     'PROJECT_TITLE': AMGUT_CONFIG.project_name,
-    'FAVICON': '/static/img/favicon.ico',
+    'FAVICON': _SITEBASE + '/static/img/favicon.ico',
     'FUNDRAZR_URL': 'https://fundrazr.com/campaigns/4Tqx5',
     'NAV_PARTICIPANT_RESOURCES': 'Participant resources',
     'NAV_HOME': 'Home',
@@ -49,26 +57,50 @@ media_locale = {
     'NAV_KIT_INSTRUCTIONS': 'Kit Instructions',
     'NAV_PARTICIPANT_LOGIN': 'Participant Log In',
     'NAV_FORGOT_KITID': 'I forgot my kit ID',
+    'NAV_INTERNATIONAL': 'International Shipping',
     'NAV_FORGOT_PASSWORD': 'I forgot my password',
-    'ADDENDUM_CERT_TITLE': '/static/img/Michael_Pollan_mod-01.png',
-    'ADDENDUM_CERT_NAME': '/static/img/Michael_Pollan_mod-01b.png',
-    'ADDENDUM_CERT_HEADER': '/static/img/Michael_Pollan_mod-02.png',
-    'ADDENDUM_CERT_BARCHART': '/static/img/Michael_Pollan_mod-11.png',
-    'ADDENDUM_CERT_BARCHART_LEGEND': '/static/img/Michael_Pollan_mod-12.png',
-    'ADDENDUM_CERT_ABUNDANT_MICROBES': '/static/img/Michael_Pollan_mod-13.png',
-    'ADDENDUM_CERT_ENRICHED_MICROBES': '/static/img/Michael_Pollan_mod-14.png',
-    'ADDENDUM_CERT_RARE_MICROBES': '/static/img/Michael_Pollan_mod-15.png',
-    'ADDENDUM_CERT_HEADER_PCOA': '/static/img/Michael_Pollan_mod-03.png',
-    'ADDENDUM_CERT_PCOA_LEGEND': '/static/img/Michael_Pollan_mod-04.png',
-    'ADDENDUM_CERT_PCOA_BODYSITES': '/static/img/Michael_Pollan_mod-08.png',
-    'ADDENDUM_CERT_PCOA_AGES_POP': '/static/img/Michael_Pollan_mod-09.png',
-    'ADDENDUM_CERT_PCOA_AG_POPULATION': '/static/img/Michael_Pollan_mod-10.png',
-    'ADDENDUM_TAX_BARCHART': '/static/img/TaxFig.png',
-    'ADDENDUM_PCOA_BODYSITES': '/static/img/PCoA1.png',
-    'ADDENDUM_PCOA_AGES_POPS': '/static/img/PCoA2.png',
-    'ADDENDUM_PCOA_AG_POPULATION': '/static/img/PCoA3.png',
-    'PORTAL_DIET_QUESTIONS': '/static/img/diet_questions.png',
-    'PORTAL_SHIPPING': '/static/img/shipping.png'
+    'ADDENDUM_CERT_TITLE': _SITEBASE + '/static/img/Michael_Pollan_mod-01.png',
+    'ADDENDUM_CERT_NAME': _SITEBASE + '/static/img/Michael_Pollan_mod-01b.png',
+    'ADDENDUM_CERT_HEADER': _SITEBASE + '/static/img/Michael_Pollan_mod-02.png',
+    'ADDENDUM_CERT_BARCHART': _SITEBASE + '/static/img/Michael_Pollan_mod-11.png',
+    'ADDENDUM_CERT_BARCHART_LEGEND': _SITEBASE + '/static/img/Michael_Pollan_mod-12.png',
+    'ADDENDUM_CERT_ABUNDANT_MICROBES': _SITEBASE + '/static/img/Michael_Pollan_mod-13.png',
+    'ADDENDUM_CERT_ENRICHED_MICROBES': _SITEBASE + '/static/img/Michael_Pollan_mod-14.png',
+    'ADDENDUM_CERT_RARE_MICROBES': _SITEBASE + '/static/img/Michael_Pollan_mod-15.png',
+    'ADDENDUM_CERT_HEADER_PCOA': _SITEBASE + '/static/img/Michael_Pollan_mod-03.png',
+    'ADDENDUM_CERT_PCOA_LEGEND': _SITEBASE + '/static/img/Michael_Pollan_mod-04.png',
+    'ADDENDUM_CERT_PCOA_BODYSITES': _SITEBASE + '/static/img/Michael_Pollan_mod-08.png',
+    'ADDENDUM_CERT_PCOA_AGES_POP': _SITEBASE + '/static/img/Michael_Pollan_mod-09.png',
+    'ADDENDUM_CERT_PCOA_AG_POPULATION': _SITEBASE + '/static/img/Michael_Pollan_mod-10.png',
+    'ADDENDUM_TAX_BARCHART': _SITEBASE + '/static/img/TaxFig.png',
+    'ADDENDUM_PCOA_BODYSITES': _SITEBASE + '/static/img/PCoA1.png',
+    'ADDENDUM_PCOA_AGES_POPS': _SITEBASE + '/static/img/PCoA2.png',
+    'ADDENDUM_PCOA_AG_POPULATION': _SITEBASE + '/static/img/PCoA3.png',
+    'PORTAL_DIET_QUESTIONS': _SITEBASE + '/static/img/diet_questions.png',
+    'PORTAL_SHIPPING': _SITEBASE + '/static/img/shipping.png',
+    'EMAIL_ERROR': "There was a problem sending your email. Please contact us directly at <a href='mailto:%(help_email)s'>%(help_email)s</a>" % {'help_email': HELP_EMAIL},
+    'EMAIL_SENT': 'Your message has been sent. We will reply shortly',
+    'SHIPPING_ADDRESS': "American Gut Project<br>Knight Lab, JSCBB<br>596 UCB<br>Boulder, CO 80309",
+}
+
+_HANDLERS = {
+    'PARTICIPANT_EXISTS': 'Participant %s already exists!',
+    'SUCCESSFULLY_ADDED': "Successfully added %s!",
+    'AUTH_REGISTER_SUBJECT': "%(project_shorthand)s Verification Code" % {'project_shorthand': AMGUT_CONFIG.project_shorthand},
+    'AUTH_REGISTER_PGP': "\n\nFor the PGP cohort, we are requesting that you collect one sample from each of the following sites:\n\nLeft hand\nRight hand\nForehead\nMouth\nFecal\n\nThis is important to ensure that we have the same types of samples for all PGP participants which, in turn, could be helpful in downstream analysis when looking for relationships between the microbiome and the human genome\n\n.",
+    'AUTH_REGISTER_BODY': "Thank you for registering with the %(project_name)s! Your verification code is:\n\n{0}\n\nYou will need this code to verifiy your kit on the %(project_shorthand)s webstite. To get started, please log into:\n\nhttp://microbio.me/BritishGut\n\nEnter the kit_id and password found inside your kit, verify the contents of your kit, and enter the verification code found in this email.{1}\n\nSincerely,\nThe %(project_shorthand)s Team" % {'project_shorthand': AMGUT_CONFIG.project_shorthand, 'project_name': AMGUT_CONFIG.project_name},
+    'KIT_REG_SUCCESS': 'Kit registered successfully.',
+    'INVALID_KITID': "Invalid Kit ID or Password",
+    'ADD_KIT_ERROR': "Could not add kit to database.  Did you hit the back button while registering and press 'register user' again?",
+    'ADD_BARCODE_ERROR': "Could not add barcode to database. Did you hit the back button while registering and press 'register user' again?",
+    'CHANGE_PASS_BODY': 'This is a courtesy email to confirm that you have changed your password for your kit with ID %s. If you did not request this change, please email us immediately at {0}'.format(media_locale['HELP_EMAIL']),
+    'CHANGE_PASS_SUBJECT': '%(project_shorthand)s Password Reset' % {'project_shorthand': AMGUT_CONFIG.project_shorthand},
+    'RESET_PASS_BODY': 'The password on American Gut Kit ID %s  has been reset please click the link below within two hours\nhttp://microbio.me/americangut/change_pass_verify/?email=%s;kitid=%s;passcode=%s',
+    'MINOR_PARENTAL_BODY': "Thank you for your interest in this study. Because of your status as a minor, we will contact you within 24 hours to verify parent/guardian consent.",
+    'MESSAGE_SENT': "Your message has been sent. We will reply shortly",
+    'KIT_IDS_BODY': 'Your {1} Kit IDs are %s. You are receiving this email because you requested your Kit ID from the {1} web page If you did not request your Kit ID please email {0} Thank you,\n The {1} Team\n'.format(media_locale['HELP_EMAIL'], AMGUT_CONFIG.project_shorthand),
+    'KIT_IDS_SUBJECT': '%(project_shorthand)s Kit ID' % {'project_shorthand': AMGUT_CONFIG.project_shorthand},
+    'BARCODE_ERROR': "ERROR: No barcode was requested"
 }
 
 # Template specific dicts
@@ -82,7 +114,6 @@ _FAQ = {
     'CONVERT_GRAMS_CALORIES': 'How do I convert grams of macronutrients into percentage of calories?',
     'TAKES_SIX_MONTHS': 'Does it really take up to 6 months to get my results?',
     'HOW_CHANGE_GUT': 'How can I change my gut microbiome?',
-    'FOOD_DIARY_ANS': 'In fact, responses to all questions on the survey, including the dietary questions, are strictly voluntary. Technically you are not required to provide all those information, but it is <em>highly recommended</em>. Having the information will help us make possible connections from your life styles to your microbe living on/within you and hopefully figure out how that can impact your health. Particularly, we know diet is a major factor affecting the gut microbiome since our gut microbes eat the food we don\'t digest. Having diet information will allow us to look for patterns in gut microbiome composition across populations of people with different diets.',
     'BETTER_OR_WORSE': 'How can I tell if my gut microbiome is better or worse than other people in my category?',
     'ONLY_FECAL_RESULTS_ANS': 'We have only sent out results for fecal samples and are in the process of evaluating how best to present the other sample types. Please see <a href="#faq12">the previous question </a>',
     'DIFFERENT_WHATS_WRONG_WITH_ME_ANS': 'No! Your gut microbiome is as unique as your fingerprint so you should expect to see some differences. Many factors can affect your gut microbiome, and any differences you see are likely to be the result of one of these factors. Maybe your diet is different than most people your age. Maybe you just traveled somewhere exotic. Different does not necessarily mean bad.',
@@ -101,9 +132,9 @@ _FAQ = {
     'BETTER_OR_WORSE_ANS': 'Right now, you can\'t. We\'re still trying to understand what constitutes a normal or average gut microbiome, and we have a lot to learn about the functions of many of the microbes that inhabit the gut. Therefore, it\'s tough to know what combinations of microbes are best for nutrition and health. That\'s one reason collecting data from so many people is important - hopefully we can start to learn more about this.',
     'LOOK_BELOW': "If you're still experiencing issues, look for your problem in the FAQ below",
     'PASSWORD_SAME_VERIFICATION_ANS': 'No. Your <strong>password</strong> is printed on the sheet that you received with your kit in the mail. That sheet looks like this:</p>'
-                                '<img src="%(FAQ_AMBIGUOUS_PASS)s"/><p>Your <strong>verification code</strong> is emailed to you. Look for the email: <br /><br /><strong>FROM:</strong>  %(project)s (info@americangut.org)<br /><strong>SUBJECT:</strong>  %(shorthand)s Kit ID & Verification Code' % {"shorthand": AMGUT_CONFIG.project_shorthand, "project": AMGUT_CONFIG.project_name, "FAQ_AMBIGUOUS_PASS": media_locale['FAQ_AMBIGUOUS_PASS']},
+                                      '<img src="%(FAQ_AMBIGUOUS_PASS)s"/><p>Your <strong>verification code</strong> is emailed to you. Look for the email: <br /><br /><strong>FROM:</strong>  %(project)s (%(help_email)s)<br /><strong>SUBJECT:</strong>  %(shorthand)s Kit ID & Verification Code' % {"shorthand": AMGUT_CONFIG.project_shorthand, "project": AMGUT_CONFIG.project_name, "FAQ_AMBIGUOUS_PASS": media_locale['FAQ_AMBIGUOUS_PASS'], 'help_email': media_locale['HELP_EMAIL']},
     'TAKES_SIX_MONTHS_ANS': 'Yes. It takes about 8 weeks for extractions, 8 weeks for the remainder of the processing, and 2 weeks to do the actual sequencing. This is before any analysis and if everything goes as planned, with no delays - equipment down, run failures, reagents or other consumables back ordered. Things do sometimes go wrong, so we say up to 6 months.',
-    'PARTICIPATE_WITH_DIAGNOSIS_ANS': 'Of course! The only exclusion criteria are: you must be more than 6 weeks old and cannot be a convicted felon. Please keep in mind that, for legal and ethical reasons, the %(project)s does not provide medically actionable results or advice.' % {"project": AMGUT_CONFIG.project_name},
+    'PARTICIPATE_WITH_DIAGNOSIS_ANS': 'Of course! The only exclusion criteria are: you must be more than 3 months old and cannot be in prison. Please keep in mind that, for legal and ethical reasons, the %(project)s does not provide medically actionable results or advice.' % {"project": AMGUT_CONFIG.project_name},
     'HOW_PROCESS_SAMPLES': 'How are the samples and data processed?',
     'WHO_MICHAEL_POLLAN_ANS': 'Michael Pollan is a New York Times Best Seller for his books on diet and nutrition. Further information about Michael can be found <a href="http://michaelpollan.com/">here</a>.',
     'WHO_MICHAEL_POLLAN': 'Who is Michael Pollan?',
@@ -118,8 +149,7 @@ _FAQ = {
     'MULTIPLE_KITS_DIFFERENT_TIMES_ANS': 'For best results, we recommend that you mail each sample within 24 hours of collection.',
     'STEPS_TO_FOLLOW': '<a href="%(video)s">%(shorthand)s - Steps to Follow When Your Kit Arrives</a> from <a href="http://vimeo.com/user16100300">shelley schlender</a> on <a href="http://vimeo.com">Vimeo</a>.' % {"shorthand": AMGUT_CONFIG.project_shorthand, "video": media_locale["STEPS_VIDEO"]},
     'WHY_TWO_SWABS': 'Why are there 2 swabs inside the tube?',
-    'MULTIPLE_KITS_DIFFERENT_TIMES': ' have a 2+ sample kit, and would like to collect and send them in at different times',
-    'FOOD_DIARY': 'Why am I asked for a seven-day food diary? Do I really need to fill the survey?',
+    'MULTIPLE_KITS_DIFFERENT_TIMES': 'I have a 2+ sample kit, and would like to collect and send them in at different times',
     'COMBINE_RESULTS_ANS': "We're still evaluating how best to present the data for samples that represent a family. We are mailing individual results now and will provide updated results through the web site later.",
     'PASSWORD_SAME_VERIFICATION': 'Is my password the same as my verification code?',
     'FECAL_NO_RESULTS': 'I sent in a fecal sample but did not get any results, what happened to them?',
@@ -141,33 +171,44 @@ _FAQ = {
     'MISSING_METADATA': 'What are missing metadata?',
     'ONLY_FECAL_RESULTS': 'I sent more than one kind of sample, but I only received data for my fecal sample. What happened to my other samples?',
     'NOT_A_BUSINESS_ANS': 'We have had many enquiries about our "service" or "business". %(shorthand)s is a donation-supported academic project that is a collaboration between the <a href="http://www.earthmicrobiome.org">Earth Microbiome Project</a> and the <a href="http://humanfoodproject.com/">Human Food Project</a>, primarily run out of the <a href="https://knightlab.colorado.edu/">Knight Lab</a> at the University of Colorado at Boulder, and is not a business or service.  In particular, %(shorthand)s is not a diagnostic test (although the information gained through the project may in future contribute to the development of diagnostic tests). All data except for information that needs to be kept confidential for privacy reasons is openly and freely released into public databases, and the project is not intended to make a profit (any surplus funds would be recycled back into furthering human microbiome research).' % {"shorthand": AMGUT_CONFIG.project_shorthand},
-    'LOG_FOOD': '<a href="%(food_log_vid)s">%(shorthand)s - How to Log Food</a> from <a href="http://vimeo.com/user16100300">shelley schlender</a> on <a href="http://vimeo.com">Vimeo</a>.' % {'food_log_vid': media_locale["FOOD_LOG"], 'shorthand': AMGUT_CONFIG.project_shorthand},
-    'HOW_PROCESS_SAMPLES_ANS': 'The majority of the samples in the %(project)s are run through a processing pipeline designed to amplify a small region of a gene that is believed to be common to all Bacteria and Archaea. This gene, the 16S ribosomal RNA gene is like a barcode you find on your groceries, and serves as a marker for different organisms. There are quite a few different ways to assess the types of Bacteria and Archaea in a sample, including a variety of techniques even to look at this single gene. Every method has its biases, and comparing data between different methods is <a href="http://www.ncbi.nlm.nih.gov/pubmed/23861384">non-trivial</a> and can sometimes be nearly impossible. One of the primary goals of the %(shorthand)s is to provide data that can be used and reused by researchers worldwide, we have opted to use the standard protocols adopted by the <a href="http://earthmicrobiome.org">Earth Microbiome Project</a>, (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22402401">Caporaso et al 2012</a>, and more detailed description of the <a href="http://www.earthmicrobiome.org/emp-standard-protocols/16s/">protocol</a>). This ensures that the data generated by the %(shorthand)s can be combined with the other 80,000 samples so far indexed by the EMP (as scientists, we get giddy about things like this).</p>'
-                                '<p>DNA sequencing is a complex challenge that involves an army of robots, ultra pure water that costs $75 per 10ml, and an amazing <a href="http://www.illumina.com/systems/miseq.ilmn">digital camera</a> that actually determines individual sequences one nucleotide at a time. The number of stunningly brilliant minds whose footprints exist in these methods is astounding. However, the challenges don\'t end once you get the DNA sequence - some might say they are just beginning. It turns out that figuring out what actually is in your sample, that is, what organisms these sequences correspond to, requires cutting edge computational approaches, supercomputers and caffeine for the people operating them. The questions being asked of the data are themselves complex, and volume of data being processed is simply phenomenal. To give you some idea, for each sample sequenced we obtain around 6 million nucleotides which we represent as letters (A, T, G or C, see <a href="http://en.wikipedia.org/wiki/Nucleotide">here</a> for more info), whereas Shakespeare\'s Hamlet only contains around 150,000 letters (ignoring spaces).</p>'
-                                ' <p>The primary software package we use for processing 16S sequence data is called Quantitative Insights into Microbial Ecology (<a href="http://www.qiime.org">QIIME</a>; <a href="http://www.ncbi.nlm.nih.gov/pubmed/20383131">Caporaso et al. 2010</a>). Using this package, we are able to start with raw sequence data and process it to so that we end up be able to  explore the relationships within and between samples using a variety of statistical methods and metrics. To help in the process, we leverage a standard and comprehensive (to date) reference database called Greengenes (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22134646">McDonald  et al. 2011</a>; <a href="http://www.ncbi.nlm.nih.gov/pubmed/16820507">DeSantis et al. 2006</a>) that includes information on a few hundred thousand Bacteria and Archaea (it is likely that there are millions or more species of bacteria). Due to the molecular limitations of our approach, and the lack of a complete reference database (because the total diversity of microbes on Earth is still unknown), our ability to determine whether a specific organism is present has a margin of error on the order of millions of years, which limits our ability to assess specific strains or even species using this inexpensive technique (more expensive techniques, such as some of the higher-level perks, can provide this information). But all is not lost! By using the evolutionary history of the organisms as inferred by the small pieces of DNA that we have, we can begin to ask broad questions about the diversity within (see <a href="http://www.ncbi.nlm.nih.gov/pubmed/7972354">Faith 1994</a>) and between samples (see <a href="http://www.ncbi.nlm.nih.gov/pubmed/16332807">Lozupone and Knight 2005</a>), and whether the patterns observed relate to study variables (e.g., BMI, exercise frequency, etc).</p>'
-                                ' <p>The specifics on how the %(shorthand)s sequence data are processed can be found <a href="http://nbviewer.ipython.org/github/biocore/American-Gut/blob/master/ipynb/module2_v1.0.ipynb">here</a>, and are written up in an executable <a href="http://ipython.org/notebook">IPython Notebook</a>, which provides all the relevant processing steps in an open-source format. Be warned, processing the full %(shorthand)s dataset takes over 5,000 CPU hours right now (i.e. if you do it on your laptop it might take 7 months, even if you don\'t run out of memory: this might put the time it takes to get your results in perspective). This is the processing pipeline that we use on your data. As this project is a work in progress, we are versioning the processing pipeline as there will continue to be improvements to the process as the project moves forward.</p>'
-                                ' <p>Additional information about the tools used in the %(project)s and our contributions to the microbiome community can be found in the following publications:</p>'
-                                ' <ul> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21552244">Minimum information about a marker gene sequence (MIMARKS) and minimum information about any (x) sequence (MIxS) specifications.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/24280061">EMPeror: a tool for visualizing high-throughput microbial community data.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/16332807">UniFrac: a new phylogenetic method for comparing microbial communities.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/16893466">UniFrac--an online tool for comparing microbial community diversity in a phylogenetic context.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/17220268">Quantitative and qualitative beta diversity measures lead to different insights into factors that structure microbial communities.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/19710709">Fast UniFrac: facilitating high-throughput phylogenetic analyses of microbial communities including analysis of pyrosequencing and PhyloChip data.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20827291">UniFrac: an effective distance metric for microbial community comparison.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21885731">Linking long-term dietary patterns with gut microbial enterotypes.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23326225">A guide to enterotypes across the human body: meta-analysis of microbial community structures in human microbiome datasets.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22699609">Structure, function and diversity of the healthy human microbiome.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22699610">A framework for human microbiome research.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23587224">The Biological Observation Matrix (BIOM) format or: how I learned to stop worrying and love the ome-ome.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22134646">An improved Greengenes taxonomy with explicit ranks for ecological and evolutionary analyses of bacteria and archaea.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21304728">The Earth Microbiome Project: Meeting report of the "1 EMP meeting on sample selection and acquisition" at Argonne National Laboratory October 6 2010.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21304727">Meeting report: the terabase metagenomics workshop and the vision of an Earth microbiome project.</a></li> </ul> <p>More detail on our work on the effects of storage conditions can be found in these publications:</p>'
-                                ' <ul> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20412303">Effect of storage conditions on the assessment of bacterial community structure in soil and human-associated samples.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20673359">Sampling and pyrosequencing methods for characterizing bacterial communities in the human gut using 16S sequence tags.</a></li> </ul> <p>And more detail on our work on sequencing and data analysis protocols can be found in these publications:</p>'
-                                ' <ul> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/17881377">Short pyrosequencing reads suffice for accurate microbial community analysis.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/18723574">Accurate taxonomy assignments from 16S rRNA sequences produced by highly parallel pyrosequencers.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/18264105">Error-correcting barcoded primers for pyrosequencing hundreds of samples in multiplex.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22237546">Selection of primers for optimal taxonomic classification of environmental 16S rRNA gene sequences.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22170427">Comparison of Illumina paired-end and single-direction sequencing for microbial 16S rRNA gene amplicon surveys.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21716311">Impact of training sets on classification of high-throughput bacterial 16s rRNA gene surveys.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21349862">PrimerProspector: de novo design and taxonomic analysis of barcoded polymerase chain reaction primers.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20383131">QIIME allows analysis of high-throughput community sequencing data.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22161565">Using QIIME to analyze 16S rRNA gene sequences from microbial communities.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23861384">Meta-analyses of studies of the human microbiota.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/24060131">Advancing our understanding of the human microbiome using QIIME.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20534432">Global patterns of 16S rRNA diversity at a depth of millions of sequences per sample.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22402401">Ultra-high-throughput microbial community analysis on the Illumina HiSeq and MiSeq platforms.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23202435">Quality-filtering vastly improves diversity estimates from Illumina amplicon sequencing.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22699611">Human gut microbiome viewed across age and geography.</a></li> </ul>' % {"shorthand": AMGUT_CONFIG.project_shorthand, "project": AMGUT_CONFIG.project_name},
+    'HOW_PROCESS_SAMPLES_ANS_1': 'The majority of the samples in the %(project)s are run through a processing pipeline designed to amplify a small region of a gene that is believed to be common to all Bacteria and Archaea. This gene, the 16S ribosomal RNA gene is like a barcode you find on your groceries, and serves as a marker for different organisms. There are quite a few different ways to assess the types of Bacteria and Archaea in a sample, including a variety of techniques even to look at this single gene. Every method has its biases, and comparing data between different methods is <a href="http://www.ncbi.nlm.nih.gov/pubmed/23861384">non-trivial</a> and can sometimes be nearly impossible. One of the primary goals of the %(shorthand)s is to provide data that can be used and reused by researchers worldwide, we have opted to use the standard protocols adopted by the <a href="http://earthmicrobiome.org">Earth Microbiome Project</a>, (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22402401">Caporaso et al 2012</a>, and more detailed description of the <a href="http://www.earthmicrobiome.org/emp-standard-protocols/16s/">protocol</a>). This ensures that the data generated by the %(shorthand)s can be combined with the other 80,000 samples so far indexed by the EMP (as scientists, we get giddy about things like this).</p>' % {'shorthand': AMGUT_CONFIG.project_shorthand, 'project': AMGUT_CONFIG.project_name},
+    'HOW_PROCESS_SAMPLES_ANS_2': 'DNA sequencing is a complex challenge that involves an army of robots, ultra pure water that costs $75 per 10ml, and an amazing <a href="http://www.illumina.com/systems/miseq.ilmn">digital camera</a> that actually determines individual sequences one nucleotide at a time. The number of stunningly brilliant minds whose footprints exist in these methods is astounding. However, the challenges don\'t end once you get the DNA sequence - some might say they are just beginning. It turns out that figuring out what actually is in your sample, that is, what organisms these sequences correspond to, requires cutting edge computational approaches, supercomputers and caffeine for the people operating them. The questions being asked of the data are themselves complex, and volume of data being processed is simply phenomenal. To give you some idea, for each sample sequenced we obtain around 6 million nucleotides which we represent as letters (A, T, G or C, see <a href="http://en.wikipedia.org/wiki/Nucleotide">here</a> for more info), whereas Shakespeare\'s Hamlet only contains around 150,000 letters (ignoring spaces).</p>',
+    'HOW_PROCESS_SAMPLES_ANS_3': 'The primary software package we use for processing 16S sequence data is called Quantitative Insights into Microbial Ecology (<a href="http://www.qiime.org">QIIME</a>; <a href="http://www.ncbi.nlm.nih.gov/pubmed/20383131">Caporaso et al. 2010</a>). Using this package, we are able to start with raw sequence data and process it to so that we end up be able to  explore the relationships within and between samples using a variety of statistical methods and metrics. To help in the process, we leverage a standard and comprehensive (to date) reference database called Greengenes (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22134646">McDonald  et al. 2011</a>; <a href="http://www.ncbi.nlm.nih.gov/pubmed/16820507">DeSantis et al. 2006</a>) that includes information on a few hundred thousand Bacteria and Archaea (it is likely that there are millions or more species of bacteria). Due to the molecular limitations of our approach, and the lack of a complete reference database (because the total diversity of microbes on Earth is still unknown), our ability to determine whether a specific organism is present has a margin of error on the order of millions of years, which limits our ability to assess specific strains or even species using this inexpensive technique (more expensive techniques, such as some of the higher-level perks, can provide this information). But all is not lost! By using the evolutionary history of the organisms as inferred by the small pieces of DNA that we have, we can begin to ask broad questions about the diversity within (see <a href="http://www.ncbi.nlm.nih.gov/pubmed/7972354">Faith 1994</a>) and between samples (see <a href="http://www.ncbi.nlm.nih.gov/pubmed/16332807">Lozupone and Knight 2005</a>), and whether the patterns observed relate to study variables (e.g., BMI, exercise frequency, etc).</p>',
+    'HOW_PROCESS_SAMPLES_ANS_4': 'The specifics on how the %(shorthand)s sequence data are processed can be found <a href="http://nbviewer.ipython.org/github/biocore/American-Gut/blob/master/ipynb/module2_v1.0.ipynb">here</a>, and are written up in an executable <a href="http://ipython.org/notebook">IPython Notebook</a>, which provides all the relevant processing steps in an open-source format. Be warned, processing the full %(shorthand)s dataset takes over 5,000 CPU hours right now (i.e. if you do it on your laptop it might take 7 months, even if you don\'t run out of memory: this might put the time it takes to get your results in perspective). This is the processing pipeline that we use on your data. As this project is a work in progress, we are versioning the processing pipeline as there will continue to be improvements to the process as the project moves forward.</p>' % {'shorthand': AMGUT_CONFIG.project_shorthand},
+    'HOW_PROCESS_SAMPLES_ANS_5': 'Additional information about the tools used in the %(project)s and our contributions to the microbiome community can be found in the following publications:',
+    'HOW_PROCESS_SAMPLES_ANS_6': '<ul> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21552244">Minimum information about a marker gene sequence (MIMARKS) and minimum information about any (x) sequence (MIxS) specifications.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/24280061">EMPeror: a tool for visualizing high-throughput microbial community data.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/16332807">UniFrac: a new phylogenetic method for comparing microbial communities.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/16893466">UniFrac--an online tool for comparing microbial community diversity in a phylogenetic context.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/17220268">Quantitative and qualitative beta diversity measures lead to different insights into factors that structure microbial communities.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/19710709">Fast UniFrac: facilitating high-throughput phylogenetic analyses of microbial communities including analysis of pyrosequencing and PhyloChip data.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20827291">UniFrac: an effective distance metric for microbial community comparison.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21885731">Linking long-term dietary patterns with gut microbial enterotypes.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23326225">A guide to enterotypes across the human body: meta-analysis of microbial community structures in human microbiome datasets.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22699609">Structure, function and diversity of the healthy human microbiome.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22699610">A framework for human microbiome research.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23587224">The Biological Observation Matrix (BIOM) format or: how I learned to stop worrying and love the ome-ome.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22134646">An improved Greengenes taxonomy with explicit ranks for ecological and evolutionary analyses of bacteria and archaea.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21304728">The Earth Microbiome Project: Meeting report of the "1 EMP meeting on sample selection and acquisition" at Argonne National Laboratory October 6 2010.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21304727">Meeting report: the terabase metagenomics workshop and the vision of an Earth microbiome project.</a></li> </ul>',
+    'HOW_PROCESS_SAMPLES_ANS_7': 'More detail on our work on the effects of storage conditions can be found in these publications:',
+    'HOW_PROCESS_SAMPLES_ANS_8': '<ul> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20412303">Effect of storage conditions on the assessment of bacterial community structure in soil and human-associated samples.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20673359">Sampling and pyrosequencing methods for characterizing bacterial communities in the human gut using 16S sequence tags.</a></li> </ul>',
+    'HOW_PROCESS_SAMPLES_ANS_9': 'And more detail on our work on sequencing and data analysis protocols can be found in these publications:',
+    'HOW_PROCESS_SAMPLES_ANS_10': '<ul> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/17881377">Short pyrosequencing reads suffice for accurate microbial community analysis.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/18723574">Accurate taxonomy assignments from 16S rRNA sequences produced by highly parallel pyrosequencers.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/18264105">Error-correcting barcoded primers for pyrosequencing hundreds of samples in multiplex.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22237546">Selection of primers for optimal taxonomic classification of environmental 16S rRNA gene sequences.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22170427">Comparison of Illumina paired-end and single-direction sequencing for microbial 16S rRNA gene amplicon surveys.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21716311">Impact of training sets on classification of high-throughput bacterial 16s rRNA gene surveys.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/21349862">PrimerProspector: de novo design and taxonomic analysis of barcoded polymerase chain reaction primers.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20383131">QIIME allows analysis of high-throughput community sequencing data.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22161565">Using QIIME to analyze 16S rRNA gene sequences from microbial communities.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23861384">Meta-analyses of studies of the human microbiota.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/24060131">Advancing our understanding of the human microbiome using QIIME.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20534432">Global patterns of 16S rRNA diversity at a depth of millions of sequences per sample.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22402401">Ultra-high-throughput microbial community analysis on the Illumina HiSeq and MiSeq platforms.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23202435">Quality-filtering vastly improves diversity estimates from Illumina amplicon sequencing.</a></li> <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22699611">Human gut microbiome viewed across age and geography.</a></li> </ul>' % {"shorthand": AMGUT_CONFIG.project_shorthand, "project": AMGUT_CONFIG.project_name},
     'ANOTHER_COPY_RESULTS_ANS': 'You can download a copy from our website. Log in with your account name and password, go to the left side bar, move your mouse to Human Samples -> PARTICIPANT NAME -> SAMPLE NUMBER, and then click on SAMPLE NUMBER.pdf to download it.' % {"shorthand": AMGUT_CONFIG.project_shorthand, "project": AMGUT_CONFIG.project_name},
     'FIND_DETAILED_INFO_ANS': 'You can find the raw data from European Bioinformatics Institute (please see <a href="#faq8">here</a>) or download the copy of your result from our website (please see <a href="#faq20">here</a>).',
     'WHEN_RESULTS_NON_FECAL': 'I sent in a non-fecal sample and have not received any results, when should I expect results?',
     'WHAT_FORMS': 'What are the forms you talk about on the sampling instructions?',
-    'INTRODUCTION_TEXT': '<h4>What is a Gut?</h4> <p>Your gut is a hole that runs through your body. Your gut is actually, developmentally speaking, the outside of your body, but it has evolved many intricacies that make it seem like the inside. Your gut starts with your mouth and ends with your anus. In between food is changed into energy, feces, bacteria, viruses and a few other things. Your gut exacts a kind of metamorphosis on everything you eat, turning hotdog or grilled cheese, miraculously, into energy and, ultimately, cells, signals and even thoughts. We are only beginning to understand this process, a process in which microbes play (or fail to play) a major role.</p>'
-                                '      <h4>What is %(shorthand)s?</h4>      <p>%(shorthand)s is a project in which scientists aim to work with non-scientists both to help them (AKA, you) understand the life inside their own guts and to do science. Science is coolest when it is informs our daily lives and what could possibly be more daily than what goes on in your gut? One of the big questions the %(shorthand)s scientists hope to figure out is what characterizes healthy and sick guts (or even just healthier and sicker guts) and how one might move from the latter to the former. Such is the sort of big lofty goal these scientists dream about at night (spirochetes rather than sugarplums dancing through their heads), but even the more ordinary goals are exciting. Even just beginning to know how many and which species live in our guts will be exciting, particularly since most of these species have never been studied, which is to say there are almost certainly new species inside you, though until you sample yourself (and all the steps that it takes to look at a sample happen&mdash; the robots, the swirling, the head scratching, the organizing of massive datasets), we won\'t know which ones. Not many people get to go to the rainforest to search for, much less discover, a new kind of monkey, but a new kind of bacteria, well, it is within (your toilet paper\'s) reach.</p>'
-                                '      <h4>What is 16S rRNA?</h4>      <p>16S rRNA is a sort of telescope through which we see species that would otherwise be invisible. Let me explain. Historically, microbiologists studied bacteria and other microscopic species by figuring out what they ate and growing them, on petri dishes, in labs, in huge piles and stacks. On the basis of this approach&mdash; which required great skill and patience&mdash; thousands, perhaps hundreds of thousands, of studies were done. But then&hellip; in the 1960s, biologists including the wonderful radical <a href="http://www.robrdunn.com/2012/12/chapter-8-grafting-the-tree-of-life/">Carl Woese</a>, began to wonder if the RNA and DNA of microbes could be used to study features of their biology. The work of Woese and others led to the study of the evolutionary biology of microbes but it also eventually led to the realization that most of the microbes around us were not culturable&mdash; we didn\'t know what they ate or what conditions they needed. This situation persists. No one knows how to grow the vast majority of kinds of organisms living on your body and so the only way to even know they are there is to look at their RNA. There are many bits of RNA and DNA that one might look at, but a bit called 16S has proven particularly useful.</p>'
-                                '      <h4>Do you really have a robot?</h4>      <p>Look, here is the deal. Robots. Microbiologists use robots. Personally, I think the fact that microbiologists study the dominant fraction of life on Earth, a fraction that carries out most of the important process (and a fair bit of inexplicable magic) makes microbiologists cool. I am not a microbiologist; I am an evolutionary biologist and a writer, but I think that microbiologists are hipsters cloaked in scientists clothing (and language). But if the outrageousness of their quarry does not convince you they are hip, well, then, let me remind you, they have robots.<br/>&nbsp;<br/>The robots enable the scientists to rapidly extract the DNA and RNA from thousands of samples simultaneously. Specifically, they can load your samples into small plastic plates each with 96 little wells. The robot then loads chemicals into the wells and heats the chemically-laced wells enough to break open the bacterial cells in the sample, BAM! This releases the cell\'s DNA and RNA. The robots then decode the specific letters (nucleotides) of the 16S gene using the nucleotides dumped out of the broken microbial cells into these plates.      <h4>Tree of life</h4>      <p>There is an evolutionary tree inside you. Well, sort of. When scientists study the microbes in your gut (and from the same samples we could also study viruses, bacteriophages&mdash; the viruses that attack bacteria&mdash;, fungi or even the presence of animals such as worms of various sorts) they do so by looking at the 16s or other genetic code of the RNA on the swabs you send us. We compare the code of each bit of RNA we find to the code of species other people have collected and also the code of the other bits of RNA in your sample. As a result, we can actually use the results of your sample to map the species living in you onto an evolutionary tree. Your own genes occupy one tiny branch on the tree of life, but the species inside of you come from all over the evolutionary tree. In fact, in some people we find species from each of the major branches of the tree of life (archaea, bacteria, eukaryotes) and then also many of the smaller branches. Inside you, in other words, are the consequences of many different and ancient evolutionary stories.</p>'
-                                '      </p>'
-                                '      <h4>What is a microbiome?</h4>      <p>A biome, as ecologists and evolutionary biologists like me historically used it is a self-contained ecosystem, where all the organisms can interact with each other and the environment in which they live, for example a rain forest is a biome, but it is made of smaller biomes, for example a tree is a biome for insects, then a single insect is a biome for bacteria. Therefore, these smaller biomes are often called microbiomes, in the case of you, it\'s your gut!&hellip; A microbiome is a small (micro) version of this larger phenomenon, a whole world within you.</p>'
-                                '      <h4>What do my microbes eat?</h4>      <p>Everyplace you have ever set your hand or any other part of your body is covered in microbes. This is true of your gut, but also everything else. Microbes live in clouds. They live in ice. They live deep in the Earth. They also live in your colon, on your skin, and so on. It is reasonable to wonder what they eat. The short answer is everything. Microbes are thousands of times more variable when it comes to their diets than are animals, plants or even fungi. Some microbes can get their nitrogen out of the air; they can, in other words, eat air. Ain\'t that cool. Others, like us, eat other species, munching them in the world\'s coolest and most ubiquitous game of packman. The bacteria in your gut are also diverse in terms of their diets. If there are two hundred species of bacteria in your gut (and there probably are at least that many) then there are at least that many different combinations of things that they are eating.</p>'
-                                '      <h4>Where do my microbes come from?</h4>      <p>If you had asked this question a few years ago, we would have had to say the stork. But increasingly we are beginning to understand more about where the specific zoo of species in you come from and it is a little grosser than the stork. If you were born vaginally, some of your gut microbes came from your mother\'s feces (birth, my friend, is messy). Some came from her vagina. Others came, if you were breast fed, from her milk. It is easiest for bacteria, it seems, to colonize our guts in the first moments of life. As we age, our stomachs become acidic. We tend to think of the acid of our stomachs as aiding in digestion; it does that but another key role of our stomachs is to prevent pathogenic species from getting into our guts. The trouble with this, well, there are a couple of problems. One is c-section birth. During c-section birth, microbes need to come from somewhere other than the mother\'s vagina and feces. The most readily available microbes tend to be those in the hospital. As a result, the microbes in c-section babies tend to, at least initially, resemble those of the hospital more than they resemble those of other babies. With time, many c-section babies eventually get colonized by enough good bacteria (from pet dogs, pet cats, their parents\' dirty hands, etc..) to get good microbes, but it is a more chancy process. But then, the big question, one we just don\'t know the answer to, is which and how many microbes colonize our guts as we get older. How many microbes ride through the acid bath of our stomach on our food and take up residence? We know that bad bacteria, pathogens, do this, but just how often and how good ones do it is not well worked out. You might be thinking, what about yoghurt and I\'ll tell you the answer, definitely, is we don\'t really know. Do people who eat yoghurt have guts colonized by species from that yoghurt? Maybe, possibly, I bet they do, but we don\'t really know (though if we get enough samples from yoghurt and non yoghurt eaters, we could know).</p>'
-                                '      <h4>What will we discover in your gut?</h4>      <p>When the early meetings were going on about this project, everyone sat around talking about what we might see from colon samples. One scientist was sure that we would see bacteria that looked like Elvis. Another though we would find Shakespeare\'s great lost play. But the truth is all that we are going to see from your gut are lists of nucleotides. Let me explain&hellip;<br/>&nbsp;<br/>Nucleotides are those hunks of protein out of which DNA and RNA are made. They come in different forms to which scientists have assigned names and letters. When the robots are done with the work, what they produce are lists of the nucleotides in all of 16S genes from all of the cells in your sample. These nucleotides tell the scientists which kinds of life are in your sample (and in you). But because we will only have samples of little stretches of the 16S genes, we won\'t know exactly which species are in you, just which lineages they are from. You might have the bacterial equivalent of a chimpanzee and a gorilla in you, but all we\'ll know from your sample is that there was an ape. Knowing you have a bacterial ape in your gut will, on its own, not tell you so much. The real information will come from context, statistical context. I know, that sounds boring, but I promise it is not.<br/>&nbsp;<br/>We think that hundreds of different things you do during your life, in addition to what your mother and father did (let\'s try not to think about that), your genes and even just where you grew up influence which species of microbes are found inside you. But we don\'t really know. The problem is humans are so darn complicated. What we need to be able to do is to compare large numbers of people, people who differ in many ways, to be able to sort out which variables are sometimes a little important and which ones are the big deal. Is a vegan gut very different from a vegetarian one? Does eating yoghurt make a big difference? Do the effects of a c-section birth last forever? These questions require us to compare many people, which is where you come in. Your sample, gives us context and it gives you context too. It won\'t be terribly exciting on its own (you will know which ancient lineages you have dividing and thriving inside you. OK, that is pretty cool on second thought), but it will be very exciting in context. Where do you fall relative to fish eaters, sick people healthy people, hunter gatherers, or even your dog? You will know and we will know. And this is not all.<br/>&nbsp;<br/>All of the questions I have mentioned so far are what I might call first order questions. How does this thing compare to that thing. But what we\'d love to be able to answer are second order questions, contingent questions, questions such as whether the effect of your diet depends on your ethnicity (it probably does), whether the effect of having a dog depends on whether or not you live in the city (again, I bet it does) and so on. These questions are exactly the sort of question we have failed to be able to answer well when it comes to diet, because we don\'t have big enough samples sizes. We can see the forest for all of humans. Well, that isn\'t quite right, but you get the idea, we will be able to understand elaborate effects of multiple variables on the wilderness between your pie hole and the other hole and that, to us, is exciting.</p>'
-                                '<h4>A few of the stories of the evolutionary tree in your gut</h4><p>Some people have least favorite bacteria. Salmonella, for example, seems to have inspired some haters. But microbiologists also have favorite bacteria, as well they should. The stories of bacteria (and those who chase and study them) are among the most important of humanities stories and include the tales of many species without which we could not live, or whose presence or absence affects how we live. These species are as fascinating and, dare I say, lovely as pandas or koala bears, just harder to see and far more significant. I have begun to compile a book of the stories of some of the most common and interesting species you are likely to encounter&mdash; whether in your own gut, on your lettuce or the next time you sink your fingers into the soil. These stories will be available online here at <a href="http://invisiblelife.yourwildlife.org/">Invisible Life</a> as they are compiled as a book, a book written by some of the very best science writers AND scientists out there. For starters, you might be interested to know that <a href="http://invisiblelife.yourwildlife.org/mycoplasma/">the smallest species on Earth</a> is sometimes found inside humans and, once we look at your 16S, we will even know whether it lives in you. As more of these stories are written, they will appear here, eventually as an ebook, an ebook that you can reference when you find out what lives inside you to know whether your constant companion is a species we know everything about or, as is more typical, no one has ever studied. Like Charlie Chaplin once said&hellip; Wait, Charlie Chaplin was the one who didn\'t say anything wasn\'t he.</p>' % {"shorthand": AMGUT_CONFIG.project_shorthand, "project": AMGUT_CONFIG.project_name},
+    'INTRODUCTION_WHAT_IS_GUT_HEAD': "What is a Gut?",
+    'INTRODUCTION_WHAT_IS_GUT': "Your gut is a hole that runs through your body. Your gut is actually, developmentally speaking, the outside of your body, but it has evolved many intricacies that make it seem like the inside. Your gut starts with your mouth and ends with your anus. In between food is changed into energy, feces, bacteria, viruses and a few other things. Your gut exacts a kind of metamorphosis on everything you eat, turning hotdog or grilled cheese, miraculously, into energy and, ultimately, cells, signals and even thoughts. We are only beginning to understand this process, a process in which microbes play (or fail to play) a major role.",
+    'INTRODUCTION_WHAT_IS_PROJECT_HEAD': "What is the %(project_name)s?" % {'project_name': AMGUT_CONFIG.project_name},
+    'INTRODUCTION_WHAT_IS_PROJECT': "<p>The %(project_name)s is a project in which scientists aim to work with non-scientists both to help them (AKA, you) understand the life inside their own guts and to do science. Science is coolest when it is informs our daily lives and what could possibly be more daily than what goes on in your gut? One of the big questions the %(project_shorthand)s scientists hope to figure out is what characterizes healthy and sick guts (or even just healthier and sicker guts) and how one might move from the latter to the former. Such is the sort of big lofty goal these scientists dream about at night (spirochetes rather than sugarplums dancing through their heads), but even the more ordinary goals are exciting. Even just beginning to know how many and which species live in our guts will be exciting, particularly since most of these species have never been studied, which is to say there are almost certainly new species inside you, though until you sample yourself (and all the steps that it takes to look at a sample happen&mdash; the robots, the swirling, the head scratching, the organizing of massive datasets), we won't know which ones. Not many people get to go to the rainforest to search for, much less discover, a new kind of monkey, but a new kind of bacteria, well, it is within (your toilet paper's) reach." % {'project_shorthand': AMGUT_CONFIG.project_shorthand, 'project_name': AMGUT_CONFIG.project_name},
+    'INTRODUCTION_WHAT_IS_16S_HEAD': "What is 16S rRNA?",
+    'INTRODUCTION_WHAT_IS_16S': "16S rRNA is a sort of telescope through which we see species that would otherwise be invisible. Let me explain. Historically, microbiologists studied bacteria and other microscopic species by figuring out what they ate and growing them, on petri dishes, in labs, in huge piles and stacks. On the basis of this approach&mdash; which required great skill and patience&mdash; thousands, perhaps hundreds of thousands, of studies were done. But then&hellip; in the 1960s, biologists including the wonderful radical <a href=\"http://www.robrdunn.com/2012/12/chapter-8-grafting-the-tree-of-life/\">Carl Woese</a>, began to wonder if the RNA and DNA of microbes could be used to study features of their biology. The work of Woese and others led to the study of the evolutionary biology of microbes but it also eventually led to the realization that most of the microbes around us were not culturable&mdash; we didn't know what they ate or what conditions they needed. This situation persists. No one knows how to grow the vast majority of kinds of organisms living on your body and so the only way to even know they are there is to look at their RNA. There are many bits of RNA and DNA that one might look at, but a bit called 16S has proven particularly useful.",
+    'INTRODUCTION_ROBOTS_HEAD': "Do you really have a robot?",
+    'INTRODUCTION_ROBOTS': "Look, here is the deal. Robots. Microbiologists use robots. Personally, I think the fact that microbiologists study the dominant fraction of life on Earth, a fraction that carries out most of the important process (and a fair bit of inexplicable magic) makes microbiologists cool. I am not a microbiologist; I am an evolutionary biologist and a writer, but I think that microbiologists are hipsters cloaked in scientists clothing (and language). But if the outrageousness of their quarry does not convince you they are hip, well, then, let me remind you, they have robots.<br/>&nbsp;<br/>The robots enable the scientists to rapidly extract the DNA and RNA from thousands of samples simultaneously. Specifically, they can load your samples into small plastic plates each with 96 little wells. The robot then loads chemicals into the wells and heats the chemically-laced wells enough to break open the bacterial cells in the sample, BAM! This releases the cell's DNA and RNA. The robots then decode the specific letters (nucleotides) of the 16S gene using the nucleotides dumped out of the broken microbial cells into these plates.",
+    'INTRODUCTION_TREE_HEAD': "Tree of life",
+    'INTRODUCTION_TREE': "There is an evolutionary tree inside you. Well, sort of. When scientists study the microbes in your gut (and from the same samples we could also study viruses, bacteriophages&mdash; the viruses that attack bacteria&mdash;, fungi or even the presence of animals such as worms of various sorts) they do so by looking at the 16s or other genetic code of the RNA on the swabs you send us. We compare the code of each bit of RNA we find to the code of species other people have collected and also the code of the other bits of RNA in your sample. As a result, we can actually use the results of your sample to map the species living in you onto an evolutionary tree. Your own genes occupy one tiny branch on the tree of life, but the species inside of you come from all over the evolutionary tree. In fact, in some people we find species from each of the major branches of the tree of life (archaea, bacteria, eukaryotes) and then also many of the smaller branches. Inside you, in other words, are the consequences of many different and ancient evolutionary stories.",
+    'INTRODUCTION_MICROBIOME_HEAD': "What is a microbiome?",
+    'INTRODUCTION_MICROBIOME': "A biome, as ecologists and evolutionary biologists like me historically used it is a self-contained ecosystem, where all the organisms can interact with each other and the environment in which they live, for example a rain forest is a biome, but it is made of smaller biomes, for example a tree is a biome for insects, then a single insect is a biome for bacteria. Therefore, these smaller biomes are often called microbiomes, in the case of you, it's your gut!&hellip; A microbiome is a small (micro) version of this larger phenomenon, a whole world within you.",
+    'INTRODUCTION_EAT_HEAD': "What do my microbes eat?",
+    'INTRODUCTION_EAT': "Everyplace you have ever set your hand or any other part of your body is covered in microbes. This is true of your gut, but also everything else. Microbes live in clouds. They live in ice. They live deep in the Earth. They also live in your colon, on your skin, and so on. It is reasonable to wonder what they eat. The short answer is everything. Microbes are thousands of times more variable when it comes to their diets than are animals, plants or even fungi. Some microbes can get their nitrogen out of the air; they can, in other words, eat air. Ain't that cool. Others, like us, eat other species, munching them in the world's coolest and most ubiquitous game of packman. The bacteria in your gut are also diverse in terms of their diets. If there are two hundred species of bacteria in your gut (and there probably are at least that many) then there are at least that many different combinations of things that they are eating.",
+    'INTRODUCTION_MICROBES_COME_FROM_HEAD': "Where do my microbes come from?",
+    'INTRODUCTION_MICROBES_COME_FROM': "If you had asked this question a few years ago, we would have had to say the stork. But increasingly we are beginning to understand more about where the specific zoo of species in you come from and it is a little grosser than the stork. If you were born vaginally, some of your gut microbes came from your mother's feces (birth, my friend, is messy). Some came from her vagina. Others came, if you were breast fed, from her milk. It is easiest for bacteria, it seems, to colonize our guts in the first moments of life. As we age, our stomachs become acidic. We tend to think of the acid of our stomachs as aiding in digestion; it does that but another key role of our stomachs is to prevent pathogenic species from getting into our guts. The trouble with this, well, there are a couple of problems. One is c-section birth. During c-section birth, microbes need to come from somewhere other than the mother's vagina and feces. The most readily available microbes tend to be those in the hospital. As a result, the microbes in c-section babies tend to, at least initially, resemble those of the hospital more than they resemble those of other babies. With time, many c-section babies eventually get colonized by enough good bacteria (from pet dogs, pet cats, their parents' dirty hands, etc..) to get good microbes, but it is a more chancy process. But then, the big question, one we just don't know the answer to, is which and how many microbes colonize our guts as we get older. How many microbes ride through the acid bath of our stomach on our food and take up residence? We know that bad bacteria, pathogens, do this, but just how often and how good ones do it is not well worked out. You might be thinking, what about yoghurt and I'll tell you the answer, definitely, is we don't really know. Do people who eat yoghurt have guts colonized by species from that yoghurt? Maybe, possibly, I bet they do, but we don't really know (though if we get enough samples from yoghurt and non yoghurt eaters, we could know).",
+    'INTRODUCTION_DISCOVER_HEAD': "What will we discover in your gut?",
+    'INTRODUCTION_DISCOVER': "When the early meetings were going on about this project, everyone sat around talking about what we might see from colon samples. One scientist was sure that we would see bacteria that looked like Elvis. Another though we would find Shakespeare's great lost play. But the truth is all that we are going to see from your gut are lists of nucleotides. Let me explain&hellip;<br/>&nbsp;<br/>Nucleotides are those hunks of protein out of which DNA and RNA are made. They come in different forms to which scientists have assigned names and letters. When the robots are done with the work, what they produce are lists of the nucleotides in all of 16S genes from all of the cells in your sample. These nucleotides tell the scientists which kinds of life are in your sample (and in you). But because we will only have samples of little stretches of the 16S genes, we won't know exactly which species are in you, just which lineages they are from. You might have the bacterial equivalent of a chimpanzee and a gorilla in you, but all we'll know from your sample is that there was an ape. Knowing you have a bacterial ape in your gut will, on its own, not tell you so much. The real information will come from context, statistical context. I know, that sounds boring, but I promise it is not.<br/>&nbsp;<br/>We think that hundreds of different things you do during your life, in addition to what your mother and father did (let's try not to think about that), your genes and even just where you grew up influence which species of microbes are found inside you. But we don't really know. The problem is humans are so darn complicated. What we need to be able to do is to compare large numbers of people, people who differ in many ways, to be able to sort out which variables are sometimes a little important and which ones are the big deal. Is a vegan gut very different from a vegetarian one? Does eating yoghurt make a big difference? Do the effects of a c-section birth last forever? These questions require us to compare many people, which is where you come in. Your sample, gives us context and it gives you context too. It won't be terribly exciting on its own (you will know which ancient lineages you have dividing and thriving inside you. OK, that is pretty cool on second thought), but it will be very exciting in context. Where do you fall relative to fish eaters, sick people healthy people, hunter gatherers, or even your dog? You will know and we will know. And this is not all.<br/>&nbsp;<br/>All of the questions I have mentioned so far are what I might call first order questions. How does this thing compare to that thing. But what we'd love to be able to answer are second order questions, contingent questions, questions such as whether the effect of your diet depends on your ethnicity (it probably does), whether the effect of having a dog depends on whether or not you live in the city (again, I bet it does) and so on. These questions are exactly the sort of question we have failed to be able to answer well when it comes to diet, because we don't have big enough samples sizes. We can see the forest for all of humans. Well, that isn't quite right, but you get the idea, we will be able to understand elaborate effects of multiple variables on the wilderness between your pie hole and the other hole and that, to us, is exciting.",
+    'INTRODUCTION_STORIES_HEAD': "A few of the stories of the evolutionary tree in your gut",
+    'INTRODUCTION_STORIES': "Some people have least favorite bacteria. Salmonella, for example, seems to have inspired some haters. But microbiologists also have favorite bacteria, as well they should. The stories of bacteria (and those who chase and study them) are among the most important of humanities stories and include the tales of many species without which we could not live, or whose presence or absence affects how we live. These species are as fascinating and, dare I say, lovely as pandas or koala bears, just harder to see and far more significant. I have begun to compile a book of the stories of some of the most common and interesting species you are likely to encounter&mdash; whether in your own gut, on your lettuce or the next time you sink your fingers into the soil. These stories will be available online here at <a href=\"http://invisiblelife.yourwildlife.org/\">Invisible Life</a> as they are compiled as a book, a book written by some of the very best science writers AND scientists out there. For starters, you might be interested to know that <a href=\"http://invisiblelife.yourwildlife.org/mycoplasma/\">the smallest species on Earth</a> is sometimes found inside humans and, once we look at your 16S, we will even know whether it lives in you. As more of these stories are written, they will appear here, eventually as an ebook, an ebook that you can reference when you find out what lives inside you to know whether your constant companion is a species we know everything about or, as is more typical, no one has ever studied. Like Charlie Chaplin once said&hellip; Wait, Charlie Chaplin was the one who didn't say anything wasn't he.",
     'ANOTHER_COPY_RESULTS': 'Can I get another copy of my results?',
     'NOT_A_BUSINESS': 'We are not a business',
     'WHERE_SEND_SAMPLE_ANS': '<p>This is the shipping address:</p>'
-                                'American Gut Project<br>Knight Lab, JSCBB<br>596 UCB<br>Boulder, CO 80309<p>If you are shipping internationally, please see the <a href="/international_shipping/">international shipping instructions</a>.'
+                              '%(address)s<p>If you are shipping internationally, please see the <a href="/international_shipping/">international shipping instructions</a>.' % {'address': media_locale['SHIPPING_ADDRESS']}
 }
 
 
@@ -187,7 +228,7 @@ _HELP_REQUEST = {
 
 _DB_ERROR = {
     'HEADER': 'Oops! There seems to be a database error.',
-    'MESSAGE': 'Please help us to debug by emailing us at <a href="mailto:%(help_email)s">%(help_email)s</a> and tell us exactly what happend before you got this error.',
+    'MESSAGE': 'Please help us to debug by emailing us at <a href="mailto:%(help_email)s">%(help_email)s</a> and tell us exactly what happend before you got this error.' % {"help_email": media_locale["HELP_EMAIL"]},
     'SIGNOFF': 'Thanks, <br /> The American Gut Team'
 }
 
@@ -233,6 +274,16 @@ _NEW_PARTICIPANT_OVERVIEW = {
     'EXPLANATION': 'You have entered the add human source workflow. During this workflow you will add a human source that represents whoever is being sampled. You be asked for consent to join the project and then asked survey questions.',
     'ONCE_ADDED': 'Once you have added a human source, you will then see the name of that source in the left menu, and you will also have an option for adding a sample to that source. When you click that, you will be able to select the appropriate barcode and add sample metadata.',
     'CONTINUE': 'Continue'
+}
+
+_INTERNATIONAL = {
+    'PAGE_TITLE': '%(shorthand)s International Shipping Instructions' % {'shorthand': AMGUT_CONFIG.project_shorthand},
+    'INT_PARTICIPANTS': 'International Participants:',
+    'INSTRUCTIONS_1': 'In order to comply with amended federal and IATA regulations, we are requesting that international participants return their sample tubes through FedEx International and that international participants follow the additional safely requirements for shipping human swab samples to the United States. Your airway bill must clearly identify the package as containing "human exempt specimens". The samples will additionally need to be packaged within a secondary containment to ensure that they can safely enter the United States.',
+    'INSTRUCTIONS_2': 'For shipment, you will need to use regular tape to seal the plastic tube that contains the swab, then place the swab in the provided brown mailing envelope and place the brown envelope inside a Tyvek/plastic mailer, <strong>which can be acquired free of charge from FedEx</strong>, when shipping the package, prior to FedEx shipment.',
+    'INSTRUCTIONS_3': 'If you do not follow these directions the sample will be destroyed by United States Customs at the port of entry into the United States.',
+    'YOUR_SAMPLES': 'Your samples',
+    'YOUR_SAMPLES_LIST': '<li>Are considered dried specimens</li><li>Must be shipped via FedEx</li><li>Must have tape to sealing the plastic tube that contains the swab</li><li>Must be placed in a buff mailing envelope with the buff envelope placed inside a Tyvek/plastic mailer prior to FedEx shipment</li><li>Must be shipped with an airway bill and must be labeled with the complete address of the sender and complete address of recipient, and with the words "Human exempt sample(s)"</li>'
 }
 
 _NEW_PARTICIPANT = {
@@ -336,7 +387,7 @@ _FORGOT_PASSWORD = {'ENTER_ID_EMAIL': 'Enter your Kit ID and email',
 
 _ERROR = {
     'ERROR_OCCURED': 'AN ERROR HAS OCCURED!',
-    'ERROR_CONTACT': 'Please copy the following into an email and send this information, along with the url you were trying to access, to <a href="mailto:info@americangut.org">info@americangut.org</a>'
+    'ERROR_CONTACT': 'Please copy the following into an email and send this information, along with the url you were trying to access, to <a href="mailto:%(help_email)s">%(help_email)s</a>' % {'help_email': media_locale['HELP_EMAIL']}
     }
 
 _RETREIVE_KITID = {
@@ -345,7 +396,7 @@ _RETREIVE_KITID = {
     'SEND_EMAIL': 'Send Kit ID Email',
     'EMAIL_SUCCESS': 'Your kit ID has been emailed to you. Please check your email.',
     'EMAIL_CANTSEND': 'Mail can be sent only from microbio.me domain.',
-    'EMAIL_EXCEPTION': 'There was a problem sending you the kit ID. Please contact us directly at <a href=\"mailto:info@americangut.org\">info@americangut.org</a>.',
+    'EMAIL_EXCEPTION': 'There was a problem sending you the kit ID. Please contact us directly at <a href=\"mailto:%(help_email)s\">%(help_email)s</a>.' % {'help_email': media_locale['HELP_EMAIL']},
     'EMAIL_PROMPT': 'Email:'
     }
 
@@ -383,7 +434,7 @@ _REGISTER_USER = {
 
 _ADDENDUM = {
     'TITLE': 'American Gut Addendum',
-    'INTRO': 'We&apos;d like to note that in general these data allow you to understand how similar or different you are to other people in terms of the bacterial composition of the sample you sent. The information about the microbes is at as fine level of a taxonomic resolution as we were able to achieve with our sequencing methods, and varies for different groups of microbes. Currently, we cannot tell you what it means if you have more or less of a certain bacteria than other people. Gut microbiome research is still new, and we have a lot to learn. Your participation in the American Gut Project will allow us to learn more, and we hope to update you with new findings as they emerge.',
+    'INTRO': 'We\'d like to note that in general these data allow you to understand how similar or different you are to other people in terms of the bacterial composition of the sample you sent. The information about the microbes is at as fine level of a taxonomic resolution as we were able to achieve with our sequencing methods, and varies for different groups of microbes. Currently, we cannot tell you what it means if you have more or less of a certain bacteria than other people. Gut microbiome research is still new, and we have a lot to learn. Your participation in the American Gut Project will allow us to learn more, and we hope to update you with new findings as they emerge.',
     'LEARN_MORE': 'Learn more about your certificate by clicking on a plot or table',
     'MOD01ALT': 'Your American Gut Sample',
     'MOD01bALT': 'Michael Pollan',
@@ -400,7 +451,7 @@ _ADDENDUM = {
     'RESULTS_CAPTION': 'Your certificate is designed to help you determine what was found in your sample, and how you compare to other people. Click on a graph or table to learn more.',
     'SAMPLE_TITLE': 'What\'s in your %(PROJECT_TITLE)s sample?' % media_locale,
     'TAXONOMY': 'Taxonomy',
-    'TAXONOMY_INTRO': 'Taxonomy is a system scientists use to describe all life on the planet. Taxonomy is commonly referred to as an organism&apos;s scientific name. This name allows us to understand how closely related two organisms are to each other. There are seven major levels of taxonomy that go from less specific to more specific. The phylum level represents very broad range of organisms that have <strong>evolved over hundreds of millions of years</strong> whereas the species level represents only a small subset of them that are <strong>much more closely related</strong>. Typically, names at the genus and species levels are written in <em>italics</em> or are <u>underlined</u> (in our tables, they are <em>italicized</em>). For instance, here is the list of taxonomic levels and names for humans and chimpanzees:',
+    'TAXONOMY_INTRO': 'Taxonomy is a system scientists use to describe all life on the planet. Taxonomy is commonly referred to as an organism\'s scientific name. This name allows us to understand how closely related two organisms are to each other. There are seven major levels of taxonomy that go from less specific to more specific. The phylum level represents very broad range of organisms that have <strong>evolved over hundreds of millions of years</strong> whereas the species level represents only a small subset of them that are <strong>much more closely related</strong>. Typically, names at the genus and species levels are written in <em>italics</em> or are <u>underlined</u> (in our tables, they are <em>italicized</em>). For instance, here is the list of taxonomic levels and names for humans and chimpanzees:',
     'HUMAN_TAXONOMY': 'Human',
     'HUMAN_TAXONOMY_KINGDOM': 'Kingdom: Animalia',
     'HUMAN_TAXONOMY_PHYLUM': 'Phylum: Chordata',
@@ -451,7 +502,7 @@ _ADDENDUM = {
     'RARE_TEXT_1': 'This sample included the following rare taxa: Genus <em>Varibaculum</em>, Genus <em>Neisseria</em>, Genus <em>Campylobacter</em>, Unclassified Order ML615J-28.',
     'RARE_TEXT_2': 'This line shows four microbes that you have that are not commonly found in the type of sample you provided. Some other people may have them, but most people do not.',
     'YOUR_COMPARE': 'How do your gut microbes compare to others?',
-    'COMPARE_TEXT_1': 'Here, we present three Principle Coordinates Plots. Each point on these plots represents the bacterial composition of one sample from one person. We take all of the information about the abundances of all the bacteria in each sample and compare them to each other using this type of plot. When two points are very close to each other, it means that the types of bacteria in those two samples are very similar. Points that are farther apart represent samples that are less similar to each other. The axes mean nothing in this context. It doesn&apos;t matter how high or low a point is on the plot. The only thing that matters is how close it is to other points.',
+    'COMPARE_TEXT_1': 'Here, we present three Principle Coordinates Plots. Each point on these plots represents the bacterial composition of one sample from one person. We take all of the information about the abundances of all the bacteria in each sample and compare them to each other using this type of plot. When two points are very close to each other, it means that the types of bacteria in those two samples are very similar. Points that are farther apart represent samples that are less similar to each other. The axes mean nothing in this context. It doesn\'t matter how high or low a point is on the plot. The only thing that matters is how close it is to other points.',
     'COMPARE_TEXT_2': 'The large point represents your sample on each plot. This allows you to see how similar (close to) or different (far from) your sample is from others.',
     'DIFFERENT_BODY_SITES': 'DIfferent Body Sites',
     'DIFFERENT_BODY_SITES_ALT': 'PCoA by body site for AGP and HMP',
@@ -468,7 +519,7 @@ _ADDENDUM = {
     'MAJOR_PHYLA_BACTEROIDETES_HEADER': 'Bacteroidetes',
     'MAJOR_PHYLA_BACTEROIDETES_TEXT': 'A phylum of Gram-negative bacteria, rod-shaped, present in all sorts of environments such as soil, sediments, and fresh and marine waters. Most are saprophytic and involved in carbon cycling. Often abundant in nutrient-rich habitats and so they are a major component of animal guts where they can act as degraders of complex carbohydrates and proteins but also as pathogens. Their representatives are organized within 4 major classes among which the genus <em>Bacteroides</em> in the class of Bacteroidia is the most prevalent and the most studied. Bacteroidetes together with Firmicutes make up the majority of gut bacteria. The ratio of these two types of bacteria (specifically the dominance of Firmicutes over Bacteroidetes) may be linked to obesity.',
     'MAJOR_PHYLA_PROTEOBACTERIA_HEADER': 'Proteobacteria',
-    'MAJOR_PHYLA_PROTEOBACTERIA_TEXT': 'A phylum of Gram-negative bacteria. They are named after a Greek God Proteus to illustrate their variety of forms. They are organized in 6 recognized classes and represent all types of metabolisms ranging from heterotrophic to photosynthetic to chemoautotrophic.  They include many well-known pathogens (e.g., <em>Escherichia</em>, <em>Helicobacter</em>, <em>Salmonella</em>, <em>Vibrio</em>) as well as free-living types that can fix nitrogen (convert nitrogen present in the atmosphere into ammonia, a form of nitrogen available for plants&apos; uptake).',
+    'MAJOR_PHYLA_PROTEOBACTERIA_TEXT': 'A phylum of Gram-negative bacteria. They are named after a Greek God Proteus to illustrate their variety of forms. They are organized in 6 recognized classes and represent all types of metabolisms ranging from heterotrophic to photosynthetic to chemoautotrophic.  They include many well-known pathogens (e.g., <em>Escherichia</em>, <em>Helicobacter</em>, <em>Salmonella</em>, <em>Vibrio</em>) as well as free-living types that can fix nitrogen (convert nitrogen present in the atmosphere into ammonia, a form of nitrogen available for plants\' uptake).',
     'MAJOR_PHYLA_ACTINOBACTERIA_HEADER': 'Actinobacteria',
     'MAJOR_PHYLA_ACTINOBACTERIA_TEXT': 'A phylum of Gram-positive bacteria both terrestrial and aquatic. They are mostly recognized as excellent decomposers of resilient organic compounds such as cellulose or chitin. Although some can be plant and animal pathogens, others are more known as producers of antibiotics (e.g. Streptomyces).  In their body form, many resemble fungi by forming mycelial-like filaments.',
     'MAJOR_PHYLA_VERRUCOMICROBIA_HEADER': 'Verrucomicrobia',
@@ -498,13 +549,13 @@ _PORTAL = {
     'VERIFICATION_TEXT_2': 'our <strong>Verification Code</strong> will be sent to you via email to the address that you entered when you made your donation; if you made an anonymous donation, please <a href="/authed/help_request/">contact us directly</a>.',
     'VERIFICATION_TEXT_3': 'If you cannot find your <strong>Verification Code</strong>, please make sure to check your spam folder. If you still cannot find the code, please <a href="/authed/help_request/">contact us</a>.',
     'VERIFICATION_HEADER_2': 'Verify your identity and kit barcode(s)',
-    'VERIFICATION_CODE_PROMPT': 'Please enter the verification code sent to your email address <a href="#" class="help" title="If you did not recieve a verification code in your email from American Gut, please check your spam folder. If you still can not find it, contact %(help_email)s">(?)</a>',
+    'VERIFICATION_CODE_PROMPT': 'Please enter the verification code sent to your email address <a href="#" class="help" title="If you did not recieve a verification code in your email from American Gut, please check your spam folder. If you still can not find it, contact %(help_email)s">(?)</a>' % {"help_email": media_locale["HELP_EMAIL"]},
     'VERIFICATION_CODE_ERROR': 'The kit verification code you entered does not match our records. Please double-check the code you entered. If you continue to experience difficulties, please <a href=/authed/help_request/>contact us</a>.',
     'VERIFY_BARCODES': 'Please verify that the barcode(s) you received in the mail match the barcode(s) here',
     'VERIFY_BARCODES_POPUP': 'The barcode you need to verify is located on the outside of your sample tube.',
     'SAMPLE_SOURCE_HEADER_1': 'Sample Source',
     'SAMPLE_SOURCE_TEXT_1': 'There are three different sample sources that you can choose from for the %(project)s. The sources are human, animal and environmental. The buttons below will allow you to add a new sample source.',
-    'SAMPLE_SOURCE_TEXT_2': 'If you add a <strong>human</strong> source, you will need to have a completed 7 day food diary for that human. If you add a <strong>human</strong> or <strong>animal</strong> source, you will be asked to complete a survey',
+    'SAMPLE_SOURCE_TEXT_2': 'If you add a <strong>human</strong> or <strong>animal</strong> source, you will be asked to complete a survey',
     'SAMPLE_SOURCE_TYPE_HUMAN': 'Human',
     'SAMPLE_SOURCE_TYPE_ANIMAL': 'Animal',
     'SAMPLE_SOURCE_TYPE_ENVIRONMENTAL': 'Environmental',
@@ -512,12 +563,11 @@ _PORTAL = {
     'SURVEY_TEXT_1': 'If you are taking a human or animal sample, we ask that you complete a survey.',
     'SURVEY_TEXT_2': 'The survey will take <strong>30-45 minutes</strong> for a human subject, or <strong>10 minutes</strong> for an animal subject. You <strong>cannot</strong> save in the middle of the survey, so please set aside enough time to complete the entire survey.',
     'SURVEY_TEXT_3': 'If you are taking a human sample, the survey includes demographic, lifestyle, medical and diet questions. All survey questions are optional.',
-    'SURVEY_TEXT_4': 'The 7 day food diary is used when answering the human survey, so please be sure to have that ready <strong>before</strong> starting the survey. We strongly recommend using <a href="http://caloriecount.about.com/">CalorieCount</a> to record dietary intake, though you are free to use whatever method you find most convenient. A screenshot of the dietary questions is shown below, <strong>please make sure to use a tool that will allow you to accurately answer these questions</strong>.',
-    'SURVEY_TEXT_5': 'Additionally, <a href="http://titojankowski.com">Tito Jankowski</a> has compiled a <a href="http://titojankowski.com/american-gut-how-to/">comprehensive guide</a> on how to do this if you are a <a href="http://www.myfitnesspal.com">MyFitnessPal</a> user.',
+    'SURVEY_TEXT_4': 'The diet questions do not require a food diary, but please be prepared to answer questions about your eating habits. A screenshot of the dietary questions is shown below.',
     'SAMPLE_STEPS_HEADER_1': 'Before Taking Your Samples',
     'SAMPLE_STEPS_TEXT_1': 'These are the steps involved in taking a sample:',
     'SAMPLE_STEPS_TEXT_2': '<li>Make sure you have <a href="#" onclick="selectTab(\'source\')">added your sample source and complete the required survey(s)</a></li><li>Remove the sample swabs from the sample tube</li><li>Collect your sample following the guidelines below</li><li>Place sample swabs into the sample tube</li>',
-    'SAMPLE_STEPS_TEXT_3': 'These sample collection instructions are very important, please read through them <strong>before</strong> beginning to take your sample. Deviations will cause issues with sample processing, sequencing, and data analysis. We cannot guarantee that we will be able to process your sample if the instructions are not followed, and <strong>we cannot offer replacements if instructions were not followed</strong>. Please do not hesitate to ask us questions at <a href="/authed/help_request/">%(help_email)s</a>.',
+    'SAMPLE_STEPS_TEXT_3': 'These sample collection instructions are very important, please read through them <strong>before</strong> beginning to take your sample. Deviations will cause issues with sample processing, sequencing, and data analysis. We cannot guarantee that we will be able to process your sample if the instructions are not followed, and <strong>we cannot offer replacements if instructions were not followed</strong>. Please do not hesitate to ask us questions at <a href="/authed/help_request/">%(help_email)s</a>.' % {"help_email": media_locale["HELP_EMAIL"]},
     'SAMPLE_STEPS_HEADER_2': 'Taking Your Samples',
     'SAMPLE_STEPS_TEXT_4': 'Once you have removed the sample tube, only handle the sample swab by the red cap.',
     'SAMPLE_STEPS_TEXT_5': 'For a <strong>fecal sample</strong>, rub both cotton tips on a fecal specimen (a used piece ofbathroom tissue). Collect a small amount of biomass. Maximum collection would be to saturate 1/2 a swab. <strong>More is not better!</strong> The ideal amount of biomass collected is shown below.',
@@ -537,7 +587,7 @@ _PORTAL = {
     'DOMESTIC_HEADER_1': 'Domestic Shipping',
     'DOMESTIC_TEXT_1': 'Shipping within the US should be less than $1.50, but we recommend taking the sample to the post office to get the proper postage. Getting the postage right on the first try is important since samples that spend a long time in transit will likely not produce the highest quality results.',
     'DOMESTIC_TEXT_2': 'This is the shipping address:',
-    'DOMESTIC_TEXT_3': 'American Gut Project<br />Knight Lab, JSCBB<br />596 UCB<br />Boulder, CO 80309',
+    'DOMESTIC_TEXT_3': media_locale['SHIPPING_ADDRESS'],
     'INTERNATIONAL_HEADER_1': 'International Shipping',
     'INTERNATIONAL_TEXT_1': 'In order to comply with amended federal and IATA regulations, we are requesting that international participants return their sample tubes through FedEx International and that international participants follow the additional safely requirements for shipping human swab samples to the United States. Your airway bill must clearly identify the package as containing "human exempt specimens". The samples will additionally need to be packaged within a secondary containment to ensure that they can safely enter the United States.',
     'INTERNATIONAL_TEXT_2': 'For shipment, you will need to use clear tape to secure the sample swabs to the sample tube, then place the sample tube in the provided buff mailing envelope. Then place the buff envelope inside a Tyvek/plastic mailer, <strong>which can be acquired free of charge from FedEx</strong>, when shipping the sample, prior to FedEx shipment.',
@@ -567,6 +617,595 @@ _CHANGE_PASS_VERIFY = {
     'NO_EMAIL_3': 'This is a courtesy email to confirm that you have changed your password for your kit with ID %(kitid)s If you did not request this change, please email us immediately at %(help_email)s.'
 }
 
+# helper tuples for the survey questions
+_NO_RESPONSE_CHOICE = "Unspecified"
+_YES_NO_CHOICES = (_NO_RESPONSE_CHOICE, 'Yes', 'No')
+_YES_NO_NOTSURE_CHOICES = (_NO_RESPONSE_CHOICE, 'Yes', 'No', 'Not sure')
+_FREQUENCY_MONTH_CHOICES = (_NO_RESPONSE_CHOICE,
+                            'Never',
+                            'Rarely (a few times/month)',
+                            'Occasionally (1-2 times/week)',
+                            'Regularly (3-5 times/week)',
+                            'Daily')
+_FREQUENCY_WEEK_CHOICES = (_NO_RESPONSE_CHOICE,
+                           'Never',
+                           'Rarely (less than once/week)',
+                           'Occasionally (1-2 times/week)',
+                           'Regularly (3-5 times/week)',
+                           'Daily')
+_DIAGNOSIS_CHOICE = (_NO_RESPONSE_CHOICE,
+                     'I do not have this condition',
+                     'Diagnosed by a medical professional (doctor, physician assistant)',
+                     'Diagnosed by an alternative medicine practitioner',
+                     'Self-diagnosed')
+
+_ANIMAL_SURVEY = {
+    'GENERAL_TITLE': 'General',
+    'GENERAL_QUESTION_1': 'Animal type?',
+    'GENERAL_QUESTION_1_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Dog',
+                                   'Cat',
+                                   'Small mammal',
+                                   'Large mammal',
+                                   'Fish',
+                                   'Bird',
+                                   'Reptile',
+                                   'Amphibian',
+                                   'Other'),
+
+    'GENERAL_QUESTION_2': 'Origin?',
+    'GENERAL_QUESTION_2_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Breeder',
+                                   'Shelter',
+                                   'Home',
+                                   'Wild'),
+
+    'GENERAL_QUESTION_3': 'Age?',
+    'GENERAL_QUESTION_3_CHOICES': None,
+
+    'GENERAL_QUESTION_4': 'Gender?',
+    'GENERAL_QUESTION_4_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Male',
+                                   'Female',
+                                   'Unknown'),
+
+    'GENERAL_QUESTION_5': 'Setting?',
+    'GENERAL_QUESTION_5_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Urban',
+                                   'Suburban',
+                                   'Rural'),
+
+    'GENERAL_QUESTION_6': 'Weight category?',
+    'GENERAL_QUESTION_6_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Underweight',
+                                   'Skinny',
+                                   'Normal',
+                                   'Chubby',
+                                   'Overweight'),
+
+    'GENERAL_QUESTION_7': 'Diet classification?',
+    'GENERAL_QUESTION_7_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Carnivore',
+                                   'Omnivore',
+                                   'Herbivore'),
+
+    'GENERAL_QUESTION_8': 'Food source?',
+    'GENERAL_QUESTION_8_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Pet store food',
+                                   'Human food',
+                                   'Wild food'),
+
+    'GENERAL_QUESTION_9': 'Food type?',
+    'GENERAL_QUESTION_9_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'dry',
+                                   'wet',
+                                   'both'),
+
+    'GENERAL_QUESTION_10': 'Food special attributes?',
+    'GENERAL_QUESTION_10_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Organic',
+                                    'Grain free'),
+
+    'GENERAL_QUESTION_11': 'Social?',
+    'GENERAL_QUESTION_11_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Lives alone with humans',
+                                    'Lives alone no/limited humans (shelter)',
+                                    'Lives with other animals and humans',
+                                    'Lives with other animals/limited humans'),
+
+    'GENERAL_QUESTION_12': 'Any pets the current animal lives with?',
+    'GENERAL_QUESTION_12_CHOICES': None,
+
+    'GENERAL_QUESTION_13': 'Add the age of any human that the current animal lives with',
+    'GENERAL_QUESTION_13_CHOICES': None,
+
+    'GENERAL_QUESTION_14': 'Add the gender of any human that the current animal lives with',
+    'GENERAL_QUESTION_14_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Male',
+                                    'Female',
+                                    'Other'),
+
+    'GENERAL_QUESTION_15': 'Hours spent outside?',
+    'GENERAL_QUESTION_15_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'None',
+                                    'Less than 2',
+                                    '2-4',
+                                    '4-8',
+                                    '8+'),
+
+    'GENERAL_QUESTION_16': 'Toilet water access?',
+    'GENERAL_QUESTION_16_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Regular',
+                                    'Sometimes',
+                                    'Never'),
+
+    'GENERAL_QUESTION_17': 'Coprophage?',
+    'GENERAL_QUESTION_17_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'High',
+                                    'Moderate',
+                                    'Low',
+                                    'Never'),
+
+    'SUPPLEMENTAL_COMMENTS': 'Please write anything else about this animal that you think might affect its microorganisms.'
+}
+
+_HUMAN_SURVEY_COMPLETED = {
+    'COMPLETED_HEADER': 'Congratulations!',
+    'COMPLETED_TEXT': 'You are now an enrolled participant in the %(PROJECT_TITLE)s!' % media_locale,
+    'AVAILABLE_SURVEYS': 'Below are a few additional surveys that you may be interested in completing. There is no requirement to take these surveys, and your decision does not affect your involvement in the project in anyway.',
+    'SURVEY_ASD': '<a href="http://www.anl.gov/contributors/jack-gilbert">Dr. Jack Gilbert</a> is exploring the relationship between gut dysbiosis and Autism Spectrum Disorders, and in conjunction with the American Gut Project, we started an ASD-Cohort study. This additional survey contains questions specific to that cohort, but it is open to any participant to take if they so choose. Please click <a href="%s">here</a> to take the ASD-Cohort survey.',
+    'SURVEY_VIOSCREEN': 'The American Gut Project and its sister projects are very interested in diet. If you\'d like to provide additional detail about your diet, please click <a href="%s">here</a> to take a detailed diet survey (known as an Food Frequency Questionnaire). This is a validated FFQ, and is the one used by the Mayo Clinic.'
+}
+
+# sourced from 12-0582_-_american_gut_questionnaire_amended_09012014__irb_appd_09.19.14
+_HUMAN_SURVEY = {
+    # Personal information
+    'PERSONAL_PROMPT_TITLE': 'Personal information',
+    'PERSONAL_PROMPT_NAME': 'Name:',
+    'PERSONAL_PROMPT_GENDER': 'Gender:',
+    'PERSONAL_PROMPT_HEIGHT': 'Height',
+    'PERSONAL_PROMPT_COUNTRY_OF_BIRTH': 'Country of birth:',
+    'PERSONAL_PROMPT_TODAYSDATE': 'Today\'s date:',
+    'PERSONAL_PROMPT_BIRTHDATE': 'Birth date:',
+    'PERSONAL_PROMPT_WEIGHT': 'Weight:',
+    'PERSONAL_PROMPT_ZIP': 'Current ZIP code:',
+
+    # General diet information
+    'GENERAL_DIET_TITLE': 'General Diet Information',
+    'GENERAL_DIET_QUESTION_0': 'How would you classify your diet?',
+    'GENERAL_DIET_QUESTION_0_CHOICES': (_NO_RESPONSE_CHOICE,
+                                        'Omnivore',
+                                        'Omnivore but do not eat red meat',
+                                        'Vegetarian',
+                                        'Vegetarian but eat seafood',
+                                        'Vegan'),
+
+    'GENERAL_DIET_QUESTION_1': 'Are you taking a daily multivitamin?',
+    'GENERAL_DIET_QUESTION_1_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_DIET_QUESTION_2': 'How frequently do you take a probiotic?',
+    'GENERAL_DIET_QUESTION_2_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'GENERAL_DIET_QUESTION_3': 'How frequently do you take Vitamin B complex, folate or folic acid?',
+    'GENERAL_DIET_QUESTION_3_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'GENERAL_DIET_QUESTION_4': 'How frequently do you take Vitamin D supplement?',
+    'GENERAL_DIET_QUESTION_4_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'GENERAL_DIET_QUESTION_5': 'Are you taking any other nutritional/herbal supplements?',
+    'GENERAL_DIET_QUESTION_5_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_DIET_QUESTION_6': 'Are you lactose intolerant?',
+    'GENERAL_DIET_QUESTION_6_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_DIET_QUESTION_7': 'Are you gluten intolerant?',
+    'GENERAL_DIET_QUESTION_7_CHOICES': (_NO_RESPONSE_CHOICE,
+                                        'I was diagnosed with celiac disease',
+                                        'I was diagnosed with gluten allergy (anti-gluten IgG), but not celiac disease',
+                                        'I do not eat gluten because it makes me feel bad',
+                                        'No'),
+
+    'GENERAL_DIET_QUESTION_8': 'I am allergic to __________ (mark all that apply)',
+    'GENERAL_DIET_QUESTION_8_CHOICES': (_NO_RESPONSE_CHOICE,
+                                        'Peanuts',
+                                        'Tree nuts',
+                                        'Shellfish',
+                                        'Other',
+                                        'I have no food allergies that I know of.'),
+
+    'GENERAL_DIET_QUESTION_9': 'Do you eat a paleo, modified paleo, primal, FODMAP, Westen-Price, or other low-grain, low processed food diet?',
+    'GENERAL_DIET_QUESTION_9_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_DIET_QUESTION_10': 'Do you eat meat/dairy products from animals treated with antibiotics?',
+    'GENERAL_DIET_QUESTION_10_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'GENERAL_DIET_QUESTION_11': 'Do you follow any other special diet restrictions other than those indicated above?',
+    'GENERAL_DIET_QUESTION_11_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_DIET_QUESTION_12': 'What is your drinking water source at home?',
+    'GENERAL_DIET_QUESTION_12_CHOICES': (_NO_RESPONSE_CHOICE,
+                                         'City',
+                                         'Well',
+                                         'Bottled',
+                                         'Filtered',
+                                         'Not sure'),
+
+    # General information
+    'GENERAL_TITLE': 'General Information',
+    'GENERAL_QUESTION_13': 'What is your race/ethnicity?',
+    'GENERAL_QUESTION_13_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Caucasian',
+                                    'Asian or Pacific Islander',
+                                    'African American',
+                                    'Hispanic',
+                                    'Other'),
+
+    'GENERAL_QUESTION_14': 'When did you move to current state of residence?',
+    'GENERAL_QUESTION_14_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Within the past month',
+                                    'Within the past 3 months',
+                                    'Within the past 6 months',
+                                    'Within the past year',
+                                    'I have lived in my current state of residence for more than a year.'),
+
+    'GENERAL_QUESTION_15': 'I have traveled outside of the United States in the past _________.',
+    'GENERAL_QUESTION_15_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Month',
+                                    '3 months',
+                                    '6 months',
+                                    '1 year',
+                                    'I have not been outside of the United States in the past year.'),
+
+    'GENERAL_QUESTION_16': 'How many non-family roommates do you have?',
+    'GENERAL_QUESTION_16_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'None',
+                                    'One',
+                                    'Two',
+                                    'Three',
+                                    'More than three'),
+
+    'GENERAL_QUESTION_17': 'Are any of your roommates participating in this study?',
+    'GENERAL_QUESTION_17_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'GENERAL_QUESTION_18': 'Are you related to or live with any of the other participants in this study?',
+    'GENERAL_QUESTION_18_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'GENERAL_QUESTION_19': 'Do you have a dog(s)?',
+    'GENERAL_QUESTION_19_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_QUESTION_20': 'Do you have a cat(s)?',
+    'GENERAL_QUESTION_20_CHOICES': _YES_NO_CHOICES,
+
+    'GENERAL_QUESTION_21': 'Which is your dominant hand?',
+    'GENERAL_QUESTION_21_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'I am right handed',
+                                    'I am left handed',
+                                    'I am ambidextrous'),
+
+    'GENERAL_QUESTION_22': 'What is your highest level of education?',
+    'GENERAL_QUESTION_22_CHOICES': (_NO_RESPONSE_CHOICE,
+                                    'Did not complete high school',
+                                    'High School or GED equilivant',
+                                    'Some college or technical school',
+                                    'Associate\'s degree',
+                                    'Bachelor\'s degree',
+                                    'Some graduate school or professional',
+                                    'Graduate or Professional degree'),
+
+    # General lifestyle and hygiene information
+    'LIFESTYLE_HYGIENE_TITLE': 'General Lifestyle and Hygiene Information',
+    'LIFESTYLE_HYGIENE_QUESTION_23': 'How often do you exercise?',
+    'LIFESTYLE_HYGIENE_QUESTION_23_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_24': 'Do you generally exercise indoors or outdoors?',
+    'LIFESTYLE_HYGIENE_QUESTION_24_CHOICES': (_NO_RESPONSE_CHOICE,
+                                              'Indoors',
+                                              'Outdoors',
+                                              'Both',
+                                              'Depends on the season',
+                                              'None of the above'),
+
+    'LIFESTYLE_HYGIENE_QUESTION_25': 'Do you bite your fingernails?',
+    'LIFESTYLE_HYGIENE_QUESTION_25_CHOICES': _YES_NO_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_26': 'How often do you use a swimming pool/hot tub?',
+    'LIFESTYLE_HYGIENE_QUESTION_26_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_27': 'How often do you smoke cigarettes?',
+    'LIFESTYLE_HYGIENE_QUESTION_27_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_28': 'How often do you drink alcohol?',
+    'LIFESTYLE_HYGIENE_QUESTION_28_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_29': 'What type(s) of alcohol do you typically consume (select all that apply)?',
+    'LIFESTYLE_HYGIENE_QUESTION_29_CHOICES': (_NO_RESPONSE_CHOICE,
+                                              'Beer/Cider',
+                                              'Sour beers',
+                                              'White wine',
+                                              'Red wine',
+                                              'Spirits/hard alcohol'),
+
+    'LIFESTYLE_HYGIENE_QUESTION_30': 'How often do you brush your teeth?',
+    'LIFESTYLE_HYGIENE_QUESTION_30_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_31': 'How often do you floss your teeth?',
+    'LIFESTYLE_HYGIENE_QUESTION_31_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_32': 'How often do you wear facial cosmetics?',
+    'LIFESTYLE_HYGIENE_QUESTION_32_CHOICES': _FREQUENCY_MONTH_CHOICES,
+
+    'LIFESTYLE_HYGIENE_QUESTION_33': 'Do you use deodorant or antiperspirant (antiperspirants generally contain aluminum)?',
+    'LIFESTYLE_HYGIENE_QUESTION_33_CHOICES': (_NO_RESPONSE_CHOICE,
+                                              'I use deodorant',
+                                              'I use an antiperspirant',
+                                              'Not sure, but I use some form of deodorant/antiperspirant',
+                                              'I do not use deodorant or an antiperspirant'),
+
+    'LIFESTYLE_HYGIENE_QUESTION_34': 'Approximately how many hours of sleep to you get in an average night?',
+    'LIFESTYLE_HYGIENE_QUESTION_34_CHOICES': (_NO_RESPONSE_CHOICE,
+                                              'Less than 5 hours',
+                                              '5-6 hours',
+                                              '6-7 hours',
+                                              '7-8 hours',
+                                              '8 or more hours'),
+
+    'LIFESTYLE_HYGIENE_QUESTION_35': 'Do you use fabric softener when drying your clothes?',
+    'LIFESTYLE_HYGIENE_QUESTION_35_CHOICES': _YES_NO_CHOICES,
+
+    # General health information
+    'HEALTH_TITLE': 'General Health Information',
+    'HEALTH_QUESTION_36': 'How many times do you have a bowel movement in an average day?',
+    'HEALTH_QUESTION_36_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Less than one',
+                                   'One',
+                                   'Two',
+                                   'Three',
+                                   'Four',
+                                   'Five or more'),
+
+    'HEALTH_QUESTION_37': 'Describe the quality of your bowel movements:',
+    'HEALTH_QUESTION_37_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'I tend to be constipated (have difficulty passing stool)',
+                                   'I tend to have diarrhea (watery stool)',
+                                   'I tend to have normal formed stool',
+                                   'I don\'t know, I do not have a point of reference'),
+
+    'HEALTH_QUESTION_38': 'I have taken antibiotics in the last ____________.',
+    'HEALTH_QUESTION_38_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Week',
+                                   'Month',
+                                   '6 months',
+                                   'Year',
+                                   'I have not taken antibiotics in the past year.'),
+
+    'HEALTH_QUESTION_39': 'I have received a flu vaccine in the last ____________.',
+    'HEALTH_QUESTION_39_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Week',
+                                   'Month',
+                                   '6 months',
+                                   'Year',
+                                   'I have not gotten the flu vaccine in the past year.'),
+
+    'HEALTH_QUESTION_40': 'Are you currently using some form of hormonal birth control?',
+    'HEALTH_QUESTION_40_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Yes, I am taking the "pill"',
+                                   'Yes, I use an injected contraceptive (DMPA)',
+                                   'Yes, I use a contraceptive patch (Ortho-Evra)',
+                                   'Yes, I use the NuvaRing',
+                                   'Yes, I use a hormonal IUD (Mirena)',
+                                   'No'),
+
+    'HEALTH_QUESTION_41': 'Are you currently pregnant?',
+    'HEALTH_QUESTION_41_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'HEALTH_QUESTION_42': 'My weight has _________ within the last 6 months.',
+    'HEALTH_QUESTION_42_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Increased more than 10 pounds',
+                                   'Decreased more than 10 pounds',
+                                   'Remained stable'),
+
+    'HEALTH_QUESTION_43': 'Have you had your tonsils removed?',
+    'HEALTH_QUESTION_43_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'HEALTH_QUESTION_44': 'Have you had you appendix removed?',
+    'HEALTH_QUESTION_44_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'HEALTH_QUESTION_45': 'Have you had chickenpox?',
+    'HEALTH_QUESTION_45_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'HEALTH_QUESTION_46': 'Do you currently take prescription medication for facial acne?',
+    'HEALTH_QUESTION_46_CHOICES': _YES_NO_CHOICES,
+
+    'HEALTH_QUESTION_47': 'Do you use over the counter products to control facial acne?',
+    'HEALTH_QUESTION_47_CHOICES': _YES_NO_CHOICES,
+
+    'HEALTH_QUESTION_48': 'Do you currently take over the counter or prescription medication for other conditions?',
+    'HEALTH_QUESTION_48_CHOICES': _YES_NO_CHOICES,
+
+    'HEALTH_QUESTION_49': 'Were you born via Caesarean section (C-section)?',
+    'HEALTH_QUESTION_49_CHOICES': _YES_NO_NOTSURE_CHOICES,
+
+    'HEALTH_QUESTION_50': 'How were you fed as an infant?',
+    'HEALTH_QUESTION_50_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Primarily breast milk',
+                                   'Primarily infant formula',
+                                   'A mixture of breast milk and formula',
+                                   'Not sure'),
+
+    'HEALTH_QUESTION_51.03': 'Have you ever been diagnosed with ADD/ADHD?',
+    'HEALTH_QUESTION_51.03_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.04': 'Have you ever been diagnosed with Alzheimer\'s Disease/Dementia?',
+    'HEALTH_QUESTION_51.04_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.05': 'Have you ever been diagnosed with Asthma, Cystic Fibrosis or Lung Disease?',
+    'HEALTH_QUESTION_51.05_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.06': 'Have you ever been diagnosed with Autism or Autism Spectrum Disorder?',
+    'HEALTH_QUESTION_51.06_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.07': 'Have you ever been diagnosed with Autoimmune disease (i.e. Lupus, RA, MS, Hashimoto\'s thyroiditis), not including IBD (irritable bowel disease) or type I diabetes?',
+    'HEALTH_QUESTION_51.07_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.08': 'Have you ever been diagnosed with Candida or fungal overgrowth in the gut?',
+    'HEALTH_QUESTION_51.08_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.09': 'Have you ever been diagnosed with Clostridium difficile (C. diff) infection?',
+    'HEALTH_QUESTION_51.09_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.10': 'Have you ever been diagnosed with coronary artery disease, heart disease, heart attack, stroke?',
+    'HEALTH_QUESTION_51.10_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.11': 'Have you ever been diagnosed with depression, bipolar disorder or schizophrenia?',
+    'HEALTH_QUESTION_51.11_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.12': 'Have you ever been diagnosed with diabetes?',
+    'HEALTH_QUESTION_51.12_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.13': 'Have you ever been diagnosed with epilepsy or seizure disorder?',
+    'HEALTH_QUESTION_51.13_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.14': 'Have you ever been diagnosed with irritable bowel syndrome (IBS)?',
+    'HEALTH_QUESTION_51.14_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.15': 'Have you ever been diagnosed with inflammatory bowel disease (IBD)?',
+    'HEALTH_QUESTION_51.15_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.16': 'Have you ever been diagnosed with migraines?',
+    'HEALTH_QUESTION_51.16_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.17': 'Have you ever been diagnosed with kidney disease?',
+    'HEALTH_QUESTION_51.17_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.18': 'Have you ever been diagnosed with liver disease?',
+    'HEALTH_QUESTION_51.18_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.19': 'Have you ever been diagnosed with phenylketonuria?',
+    'HEALTH_QUESTION_51.19_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.20': 'Have you ever been diagnosed with small intestinal bacterial overgrowth (SIBO)?',
+    'HEALTH_QUESTION_51.20_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.21': 'Have you ever been diagnosed with skin Condition?',
+    'HEALTH_QUESTION_51.21_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.22': 'Have you ever been diagnosed with thyroid Disease?',
+    'HEALTH_QUESTION_51.22_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_51.23': 'Have you ever been diagnosed with any other relevant condition?',
+    'HEALTH_QUESTION_51.23_CHOICES': _DIAGNOSIS_CHOICE,
+
+    'HEALTH_QUESTION_53': 'Are you willing to be contacted to answer additional questions about the conditions listed above?',
+    'HEALTH_QUESTION_53_CHOICES': _YES_NO_CHOICES,
+
+    'HEALTH_QUESTION_54': 'Do you have seasonal allergies?',
+    'HEALTH_QUESTION_54_CHOICES': _YES_NO_CHOICES,
+
+    'HEALTH_QUESTION_55': 'Do you have any of the following non-food allergies? (mark all that apply)',
+    'HEALTH_QUESTION_55_CHOICES': (_NO_RESPONSE_CHOICE,
+                                   'Drug (e.g. Penicillin)',
+                                   'Pet dander',
+                                   'Beestings',
+                                   'Poison ivy/oak',
+                                   'Sun'),
+
+    # Detailed Dietary information
+    'DETAILED_DIET_TITLE': 'Detailed Dietary information',
+    'DETAILED_DIET_QUESTION_56': 'Are you an infant who receives most of their nutrition from breast milk or formula, or an adult who receives most (more than 75% of daily calories) of their nutrition from adult nutritional shakes (i.e. Ensure)?',
+    'DETAILED_DIET_QUESTION_56_CHOICES': (_NO_RESPONSE_CHOICE,
+                                          'Yes',
+                                          'No',
+                                          'I eat both solid food and formula/breast milk'),
+
+    'DETAILED_DIET_QUESTION_57': 'In an average week, how often do you consume meat/eggs?',
+    'DETAILED_DIET_QUESTION_57_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_58': 'In an average week, how often do you cook and consume home cooked meals? (Exclude ready-to-eat meals like boxed macaroni and cheese, ramen noodles, lean cuisine)',
+    'DETAILED_DIET_QUESTION_58_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_59': 'In an average week, how often do you consume ready-to-eat meals (i.e macaroni and cheese, ramen noodles, lean cuisine)?',
+    'DETAILED_DIET_QUESTION_59_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_60': 'In an average week, how often do you eat food prepared at a restaurant, including carry-out/take-out?',
+    'DETAILED_DIET_QUESTION_60_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_61': 'In an average week, how often do you eat at least 2 servings of whole grains in a day?',
+    'DETAILED_DIET_QUESTION_61_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_62': 'In an average week, how often to you consume at least 2-3 servings of fruit in a day?',
+    'DETAILED_DIET_QUESTION_62_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_63': 'In an average week, how often do you consume at least 2-3 servings of vegetables, including potatoes in a day?',
+    'DETAILED_DIET_QUESTION_63_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_64': 'How often do you consume one or more servings of fermented vegetables in or plant products a day in an average week?',
+    'DETAILED_DIET_QUESTION_64_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_65': 'In an average week, how often do you consume at least 2 servings of milk or cheese a day?',
+    'DETAILED_DIET_QUESTION_65_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_66': 'In an average week, how often do you consume milk substitutes (soy milk, lactose free milk, almond milk, etc.)?',
+    'DETAILED_DIET_QUESTION_66_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_67': 'How often do you eat frozen desserts (ice cream/gelato/milkshakes, sherbet/sorbet, frozen yogurt, etc.)?',
+    'DETAILED_DIET_QUESTION_67_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_68': 'In an average week, how often do you eat red meat?',
+    'DETAILED_DIET_QUESTION_68_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_69': 'In an average week, how often do you consume higher fat red meats like prime rib, T-bone steak, hamburger, ribs, bacon, etc.?',
+    'DETAILED_DIET_QUESTION_69_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_70': 'How many days in an average week do you consume chicken or turkey at least once a day?',
+    'DETAILED_DIET_QUESTION_70_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_71': 'How many days in an average week do you consume seafood (fish, shrimp, lobster, crab, etc.)?',
+    'DETAILED_DIET_QUESTION_71_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_72': 'How many days in an average week do you consume salted snacks (potato chips, nacho chips, corn chips, popcorn with butter, French fries etc.)?',
+    'DETAILED_DIET_QUESTION_72_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_73': 'How many days in an average week do you consume sugary sweets (cake, cookies, pastries, donuts, muffins, chocolate etc.) at least once a day',
+    'DETAILED_DIET_QUESTION_73_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_74': 'Cook with olive oil?',
+    'DETAILED_DIET_QUESTION_74_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_75': 'Consume whole eggs (does not include egg beaters or just egg whites).',
+    'DETAILED_DIET_QUESTION_75_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_76': 'Drink 16 ounces or more of sugar sweetened beverages such as non-diet soda or fruit drink/punch (however, not including 100 % fruit juice) in a day?',
+    'DETAILED_DIET_QUESTION_76_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    'DETAILED_DIET_QUESTION_77': 'Consume at least 1L (~32 ounces) of water in a day?',
+    'DETAILED_DIET_QUESTION_77_CHOICES': _FREQUENCY_WEEK_CHOICES,
+
+    # Supplemental questions
+    'SUPPLEMENTAL_DIET': 'Dietary Supplements/Dietary Restrictions:',
+    'SUPPLEMENTAL_RICE': 'Race/ethnicity:',
+    'SUPPLEMENTAL_MEDICATION': 'Over the counter and prescription medication:',
+    'SUPPLEMENTAL_TRAVEL': 'Travel:',
+    'SUPPLEMENTAL_RELATIONSHIP': 'What is your relationship to other people in this study who have voluntarily told you of their participation (e.g. partner, children, roommates)?  For children, please specify whether or not you are genetically related.  Note that we will only use information that both parties provide.',
+    'SUPPLEMENTAL_PETS': 'Pets',
+    'SUPPLEMENTAL_PETS_INOUTDOOR': 'Indoor/outdoor or confined (cage/tank):',
+    'SUPPLEMENTAL_PETS_CONTACT': 'Contact extent:',
+    'SUPPLEMENTAL_ANTIBIOTICS': 'Antibiotic/s:',
+    'SUPPLEMENTAL_ANTIBIOTICS_NAME': 'Name:',
+    'SUPPLEMENTAL_ANTIBIOTICS_TREATMENT': 'Treatment for:',
+    'SUPPLEMENTAL_PREGNANCY': 'Pregnancy due date:',
+    'SUPPLEMENTAL_OTHER_CONDITIONS': 'Other conditions you suffer from that were not listed in the diagnosed conditions question',
+    'SUPPLEMENTAL_OPEN_COMMENT': 'Please write anything else about yourself that you think could affect your personal microorganisms.'
+}
+
+_SURVEY_MAIN = {
+    'TITLE': 'Survey',
+    'ONCE_YOU_START': 'Once you start this survey, you must complete it. Your answers will <strong>not</strong> be saved unless you complete the entire survey.',
+    'TIME_COMMITMENT': 'We anticipate that participant time commitment for completing the questionnaire online will take no more than <strong>45 minutes</strong>.',
+    'TYPES_OF_QUESTIONS': 'You will be asked questions about your general personal information (name, age, sex, height, weight, ethnicity, place of birth, and current ZIP or equivalent code). We will ask if you recently moved and where you moved from. We will ask questions about general diet information (including whether you follow a special diet, if you have food allergies, whether you have cultural or religious food restrictions). Other questions address whether you have pets and the type of contact you have with these pets and your relationship to other people in this study.  There is a section on health information including a history of allergies/asthma, if you suffer from migraines and if you have a history of irritable bowel disease.',
+    'YOU_MAY_DECLINE': 'You may decline to answer any question by not selecting an answer.',
+    'OTHER_SURVEYS': 'Following the questionnaire, you will be presented with a few other focused surveys. As with everything, those surveys are optional but your responses could help improve our understanding of the microbiome.'
+}
+
 # Actual text locale
 text_locale = {
     '404.html': _404,
@@ -581,11 +1220,17 @@ text_locale = {
     'forgot_password.html': _FORGOT_PASSWORD,
     'help_request.html': _HELP_REQUEST,
     'new_participant.html': _NEW_PARTICIPANT,
+    'international.html': _INTERNATIONAL,
     'add_sample_overview.html': _ADD_SAMPLE_OVERIVIEW,
     'participant_overview.html': _PARTICIPANT_OVERVIEW,
     'sample_overview.html': _SAMPLE_OVERVIEW,
     'taxa_summary.html': _TAXA_SUMMARY,
     'map.html': _MAP,
+    'human_survey.html': _HUMAN_SURVEY,
+    'human_survey_completed.html': _HUMAN_SURVEY_COMPLETED,
     'register_user.html': _REGISTER_USER,
-    'chage_pass_verify.html': _CHANGE_PASS_VERIFY
-    }
+    'chage_pass_verify.html': _CHANGE_PASS_VERIFY,
+    'survey_main.html': _SURVEY_MAIN,
+    'animal_survey.html': _ANIMAL_SURVEY,
+    'handlers': _HANDLERS
+}
