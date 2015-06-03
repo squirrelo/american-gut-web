@@ -402,3 +402,133 @@ class Survey(object):
     #def get_survey(self, survey_id):
     #    """Get a survey given a survey id"""
     #    new_survey
+
+
+def ag_new_survey_exists(self, barcode):
+        """
+        Returns metadata for an american gut barcode in the new database
+        tables
+        """
+        sql = "select survey_id from ag_kit_barcodes where barcode = %s"
+        cursor = self.connection.cursor()
+        cursor.execute(sql, [barcode])
+        survey_id = cursor.fetchone()
+        return survey_id is not None
+
+def get_person_info(self, survey_id):
+        # get question responses
+        info = {'birth_month': 'Unspecified', 'birth_year': 'Unspecified', 'gender': 'Unspecified'}
+        sql = ("SELECT q.american, sa.response FROM ag.survey_answers_other "
+               " sa JOIN ag.ag_login_surveys ls ON sa.survey_id = ls.survey_id "
+               "JOIN ag.survey_question q ON q.survey_question_id = sa.survey_question_id "
+               "WHERE sa.survey_id = %s AND q.american IN ('Birth month:','Birth year:','Gender:')")
+        cursor = self.get_cursor()
+        cursor.execute(sql, [survey_id])
+        rows = cursor.fetchall()
+
+        for res in rows:
+            value = json.loads(res[1])[0]
+            if res[0] == 'Birth month:':
+                info['birth_month'] = value
+            elif res[0] == 'Birth year:':
+                info['birth_year'] = value
+            elif res[0] == 'Gender:':
+                info['gender'] = value
+
+        # get name from consent form
+        sql = ("SELECT c.participant_name FROM ag.ag_consent c JOIN "
+               "ag.ag_login_surveys ls ON c.ag_login_id = ls.ag_login_id WHERE "
+               "ls.survey_id = %s")
+        cursor.execute(sql, [survey_id])
+        info["name"] = cursor.fetchone()[0]
+
+        return info
+
+def updateAGSurvey(self, ag_login_id, participant_name, field, value):
+        # Make sure no single quotes get passed as it will break the sql string
+        value = str(value).replace("'", "''")
+        participant_name = str(participant_name).replace("'", "''")
+        table = "update ag_human_survey set %s" % field
+        sql = table + "= %s where ag_login_id = %s and participant_name = %s"
+        self.get_cursor().execute(sql, [value, ag_login_id,
+                                        participant_name])
+        self.connection.commit()
+
+
+def is_old_survey(self, survey_id):
+        conn_handler = SQLConnectionHandler()
+        # check survey exists
+        survey_answers = conn_handler.execute_fetchone(
+            "SELECT exists(SELECT * FROM survey_answers WHERE survey_id = %s)",
+            [survey_id])[0]
+        survey_answers_other = conn_handler.execute_fetchone(
+            "SELECT exists(SELECT * FROM survey_answers_other WHERE "
+            "survey_id = %s)", [survey_id])[0]
+
+        return all((survey_answers is False, survey_answers_other is False))
+
+    def updateVioscreenStatus(self, survey_id, status):
+        conn_handler = SQLConnectionHandler()
+        sql = ("UPDATE ag_login_surveys SET vioscreen_status = %s WHERE "
+               "survey_id = %s")
+        conn_handler.execute(sql, (status, survey_id))
+
+def deleteAGParticipantSurvey(self, ag_login_id, participant_name):
+        # Remove user using old stype DB Schema
+        self.get_cursor().callproc('ag_delete_participant',
+                                   [ag_login_id, participant_name])
+        self.connection.commit()
+
+        # Remove user from new schema
+        conn_handler = SQLConnectionHandler()
+        sql = ("SELECT survey_id FROM ag_login_surveys WHERE ag_login_id = "
+               "%s AND participant_name = %s")
+        survey_id = conn_handler.execute_fetchone(
+            sql, (ag_login_id, participant_name))[0]
+
+        with conn_handler.get_postgres_cursor() as curr:
+            sql = ("DELETE FROM survey_answers WHERE "
+                   "survey_id = %s")
+            curr.execute(sql, [survey_id])
+
+            sql = ("DELETE FROM survey_answers_other WHERE "
+                   "survey_id = %s")
+            curr.execute(sql, [survey_id])
+
+            # Reset survey attached to barcode(s)
+            sql = ("UPDATE ag_kit_barcodes SET survey_id = NULL WHERE "
+                   "survey_id = %s")
+            curr.execute(sql, [survey_id])
+
+            sql = "DELETE FROM promoted_survey_ids WHERE survey_id = %s"
+            curr.execute(sql, [survey_id])
+
+            # Delete last due to foreign keys
+            sql = ("DELETE FROM ag_login_surveys WHERE "
+                   "survey_id = %s")
+            curr.execute(sql, [survey_id])
+
+            sql = ("DELETE FROM ag_consent WHERE ag_login_id = "
+                   "%s AND participant_name = %s")
+            curr.execute(sql, [ag_login_id, participant_name])
+
+def addAGSingle(self, ag_login_id, participant_name, field_name,
+                    field_value, table_name):
+        table = "update %s set %s" % (table_name, field_name)
+        sql = table + ("= %s where ag_login_id = %s and "
+                       "participant_name = %s")
+        self.get_cursor().execute(sql, [field_value, ag_login_id,
+                                        participant_name])
+        self.connection.commit()
+
+    def addAGGeneralValue(self, ag_login_id, participant_name, field_name,
+                          field_value):
+        self.get_cursor().callproc('ag_insert_survey_answer',
+                                   [ag_login_id, participant_name,
+                                    field_name, field_value])
+        self.connection.commit()
+
+    def deleteAGGeneralValues(self, ag_login_id, participant_name):
+        self.get_cursor().callproc('ag_delete_survey_answer',
+                                   [ag_login_id, participant_name])
+        self.connection.commit()
