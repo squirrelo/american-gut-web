@@ -6,20 +6,16 @@ from sqlalchemy import create_engine, event, DDL, Column, Table, ForeignKey
 from sqlalchemy.orm import Session, relationship
 from sqlalchemy.sql import func
 from sqlalchemy.types import String, DateTime
-from sqlalchemy.dialects.postgresql import (
-    ARRAY, BIGINT, BIT, BOOLEAN, BYTEA, CHAR, CIDR, DATE,
-    DOUBLE_PRECISION, ENUM, FLOAT, HSTORE, INET, INTEGER,
-    INTERVAL, JSON, JSONB, MACADDR, NUMERIC, OID, REAL, SMALLINT, TEXT,
-    TIME, TIMESTAMP, UUID, VARCHAR, INT4RANGE, INT8RANGE, NUMRANGE,
-    DATERANGE, TSRANGE, TSTZRANGE, TSVECTOR)
+from sqlalchemy.dialects.postgresql import UUID, FLOAT, BOOLEAN
 
 from amgut.lib.config_manager import AMGUT_CONFIG
 
 Base = declarative_base()
+Base.query = Session.query_property()
 event.listen(Base.metadata, 'before_create', DDL(
-    "CREATE SCHEMA IF NOT EXISTS ag"))
+    'CREATE SCHEMA IF NOT EXISTS ag'))
 event.listen(Base.metadata, 'before_create', DDL(
-    "CREATE SCHEMA IF NOT EXISTS barcodes"))
+    'CREATE SCHEMA IF NOT EXISTS barcodes'))
 
 # ---------- GENERIC BARCODE TABLES ----------
 
@@ -55,8 +51,8 @@ class Plate(Base):
     id = Column(BIGINT, primary_key=True, nullable=False)
     plate = Column(String(50))
     sequence_date = Column(String(20))
-    barcodes = relationship("Barcode", secondary=plate_association_table,
-                            backref="plates")
+    barcodes = relationship('Barcode', secondary=plate_association_table,
+                            backref='plates')
 
 project_association_table = Table(
     'project_barcode', Base.metadata,
@@ -72,8 +68,8 @@ class Project(Base):
 
     id = Column(BIGINT, primary_key=True, nullable=False)
     project = Column(String(200))
-    barcodes = relationship("Barcode", secondary=project_association_table,
-                            backref="projects")
+    barcodes = relationship('Barcode', secondary=project_association_table,
+                            backref='projects')
 
 
 # ---------- AG SPECIFIC TABLES ----------
@@ -105,6 +101,10 @@ class AGBarcode(Barcode):
     withdrawn = Column(BOOLEAN, default=False)
     refunded = Column(BOOLEAN, default=False)
 
+    @classmethod
+    def search(cls, search_str):
+        cls.query.filter(????).all()
+
 
 class Kit(Base):
     __tablename__ = 'kit'
@@ -121,7 +121,26 @@ class Kit(Base):
     pass_reset_code = Column(String(20))
     pass_reset_time = Column(DateTime())
     print_results = Column(BOOLEAN, default=False)
-    barcodes = relationship("AGBarcode", backref="kit")
+    barcodes = relationship('AGBarcode', backref='kit')
+    consents = relationship('Consent', backref='kit')
+
+    @classmethod
+    def search(cls, search_str):
+        cls.query.filter(????).all()
+
+
+class HandoutKit(Base):
+    __tablename__ = 'handout_kit'
+    __table_args__ = {'schema': 'ag'}
+
+    kit_id = Column(String(9), primary_key=True, nullable=False)
+    barcode = Column(String(9), ForeignKey('barcodes.barcode.barcode'),
+                    primary_key=True, nullable=False)
+    password = Column(String(30))
+    verification_code = Column(String(5))
+    sample_barcode_file = Column(String(13))
+    swabs_per_kit = Column(BIGINT, nullable=False)
+    print_results = Column(BOOLEAN, default=False)
 
 
 class Login(Base):
@@ -140,11 +159,33 @@ class Login(Base):
     longitude = Column(FLOAT)
     cannot_geocode = Column(BOOLEAN)
     elevation = Column(FLOAT)
-    kits = relationship("Kit", backref="login")
+    kits = relationship('Kit', backref='login')
+    consents = relationship('Consent', backref='login')
+
+    @classmethod
+    def search(cls, search_str):
+        cls.query.filter(????).all()
+
+
+class Consent(Base):
+    __tablename__ = 'consent'
+    __table_args__ = {'schema': 'ag'}
+
+    login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False,
+                         primary_key=True)
+    participant_name = Column(String(200), primary_key=True, nullable=False)
+    participant_email = Column(String(200), nullable=False)
+    is_juvenile = Column(BOOLEAN)
+    parent_1_name = Column(String(200))
+    parent_2_name = Column(String(200))
+    deceased_parent = Column(String(10))
+    date_signed = Column(DATE, default=func.now(), nullable=False)
+    assent_obtainer = Column(String(200))
+    age_range = Column(String(20))
 
 # ---------- BUILD THE TABLES AND ORM ----------
 
-engine = create_engine("postgresql://%s:%s@%s:%d/%s" %
+engine = create_engine('postgresql://%s:%s@%s:%d/%s' %
                        (AMGUT_CONFIG.user, AMGUT_CONFIG.password,
                         AMGUT_CONFIG.host, AMGUT_CONFIG.port,
                         AMGUT_CONFIG.database))
