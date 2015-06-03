@@ -2,20 +2,23 @@
 from __future__ import division
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, event, DDL, Column, Table, ForeignKey
+from sqlalchemy import create_engine, event, DDL, Column, Table, ForeignKey, text
 from sqlalchemy.orm import Session, relationship
 from sqlalchemy.sql import func
+from sqlalchemy.sql.expression import or_, and_
 from sqlalchemy.types import String, DateTime
-from sqlalchemy.dialects.postgresql import UUID, FLOAT, BOOLEAN
+from sqlalchemy.dialects.postgresql import (
+    UUID, FLOAT, BOOLEAN, BIGINT, ENUM, DATE)
 
 from amgut.lib.config_manager import AMGUT_CONFIG
 
 Base = declarative_base()
-Base.query = Session.query_property()
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE SCHEMA IF NOT EXISTS ag'))
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE SCHEMA IF NOT EXISTS barcodes'))
+event.listen(Base.metadata, 'before_create', DDL(
+    'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'))
 
 # ---------- GENERIC BARCODE TABLES ----------
 
@@ -23,9 +26,8 @@ event.listen(Base.metadata, 'before_create', DDL(
 class Barcode(Base):
     __tablename__ = 'barcode'
     __table_args__ = {'schema': 'barcodes'}
-    __mapper_args__ = {'polymorphic_identity': 'barcode'}
 
-    barcode = Column(String(), primary_key=True)
+    barcode = Column(String(), primary_key=True, unique=True)
     create_date_time = Column(DateTime, default=func.now())
     status = Column(String(100))
     scan_date = Column(String(20))
@@ -35,6 +37,13 @@ class Barcode(Base):
         'WAITING', 'SUCCESS', 'FAILED_SEQUENCING', 'FAILED_SEQUENCING_1',
         'FAILED_SEQUENCING_2', 'FAILED_SEQUENCING_3', name='seq_status'))
     obsolete = Column(String(1))
+
+    __mapper_args__ = {'polymorphic_identity': 'barcode',
+                       'polymorphic_on': barcode}
+
+    @classmethod
+    def get_all(cls):
+        return session.query(Barcode).order_by(Barcode.barcode)
 
 plate_association_table = Table(
     'plate_barcode', Base.metadata,
@@ -54,6 +63,10 @@ class Plate(Base):
     barcodes = relationship('Barcode', secondary=plate_association_table,
                             backref='plates')
 
+    @classmethod
+    def get_all(cls):
+        return session.query(Plate).order_by(Plate.id)
+
 project_association_table = Table(
     'project_barcode', Base.metadata,
     Column('project_id', BIGINT, ForeignKey('barcodes.project.id'),
@@ -67,12 +80,63 @@ class Project(Base):
     __table_args__ = {'schema': 'barcodes'}
 
     id = Column(BIGINT, primary_key=True, nullable=False)
-    project = Column(String(200))
+    project = Column(String(200), unique=True)
     barcodes = relationship('Barcode', secondary=project_association_table,
                             backref='projects')
 
+    @classmethod
+    def get_all(cls):
+        return session.query(Project).order_by(Project.id)
+
 
 # ---------- AG SPECIFIC TABLES ----------
+class Kit(Base):
+    __tablename__ = 'kit'
+    __table_args__ = {'schema': 'ag'}
+
+    id = Column(UUID, server_default=text("uuid_generate_v4()"),
+                primary_key=True, unique=True)
+    ag_login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False)
+    supplied_kit_id = Column(String(9), nullable=False)
+    kit_password = Column(String(50))
+    swabs_per_kit = Column(BIGINT, nullable=False)
+    kit_verification_code = Column(String(50))
+    kit_verified = Column(BOOLEAN, default=False)
+    verification_email_sent = Column(BOOLEAN, default=False)
+    pass_reset_code = Column(String(20))
+    pass_reset_time = Column(DateTime())
+    print_results = Column(BOOLEAN, default=False)
+    barcodes = relationship('AGBarcode', backref='kit')
+    consents = relationship('Consent', backref='kit')
+
+    @classmethod
+    def get_all(cls):
+        return session.query(Kit).order_by(Kit.id)
+
+    @classmethod
+    def search_skid(cls, search_str):
+        cls.query.filter(cls.supplied_kit_id.like('%%s%' % search_str))
+
+class HandoutKit(Base):
+    __tablename__ = 'handout_kit'
+    __table_args__ = {'schema': 'ag'}
+
+    id = Column(String(9), primary_key=True, nullable=False, unique=True)
+    password = Column(String(30))
+    verification_code = Column(String(5))
+    sample_barcode_file = Column(String(13))
+    swabs_per_kit = Column(BIGINT, nullable=False)
+    print_results = Column(BOOLEAN, default=False)
+    barcodes = relationship('HandoutBarcode', backref='kit')
+
+    @classmethod
+    def get_all(cls):
+        return session.query(HandoutKit).order_by(HandoutKit.id)
+
+    @classmethod
+    def search(cls, search_str):
+        cls.query.filter(or_(cls.barcode.like('%%s%' % search_str),
+                             cls.id.like('%%s%' % search_str)))
 
 
 class AGBarcode(Barcode):
@@ -82,7 +146,7 @@ class AGBarcode(Barcode):
 
     kit_id = Column(UUID, ForeignKey('ag.kit.id'), primary_key=True)
     barcode = Column(String(), ForeignKey('barcodes.barcode.barcode'),
-                     primary_key=True)
+                     primary_key=True, unique=True)
     survey_id = Column(String())
     sample_barcode_file = Column(String(500))
     sample_barcode_file_md5 = Column(String(50))
@@ -102,52 +166,30 @@ class AGBarcode(Barcode):
     refunded = Column(BOOLEAN, default=False)
 
     @classmethod
-    def search(cls, search_str):
-        cls.query.filter(????).all()
-
-
-class Kit(Base):
-    __tablename__ = 'kit'
-    __table_args__ = {'schema': 'ag'}
-
-    id = Column(UUID, default=func.uuid_generate_v4(), primary_key=True)
-    ag_login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False)
-    supplied_kit_id = Column(String(50), nullable=False)
-    kit_password = Column(String(50))
-    swabs_per_kit = Column(BIGINT, nullable=False)
-    kit_verification_code = Column(String(50))
-    kit_verified = Column(BOOLEAN, default=False)
-    verification_email_sent = Column(BOOLEAN, default=False)
-    pass_reset_code = Column(String(20))
-    pass_reset_time = Column(DateTime())
-    print_results = Column(BOOLEAN, default=False)
-    barcodes = relationship('AGBarcode', backref='kit')
-    consents = relationship('Consent', backref='kit')
+    def get_all(cls):
+        return session.query(AGBarcode).order_by(AGBarcode.barcode)
 
     @classmethod
     def search(cls, search_str):
-        cls.query.filter(????).all()
+        cls.query.filter(cls.barcode.like('%%s%' % search_str))
 
 
-class HandoutKit(Base):
-    __tablename__ = 'handout_kit'
+class HandoutBarcode(Barcode):
+    __tablename__ = 'handout_barcode'
     __table_args__ = {'schema': 'ag'}
 
-    kit_id = Column(String(9), primary_key=True, nullable=False)
-    barcode = Column(String(9), ForeignKey('barcodes.barcode.barcode'),
+    kit_id = Column(String(9), ForeignKey('ag.handout_kit.id'),
                     primary_key=True, nullable=False)
-    password = Column(String(30))
-    verification_code = Column(String(5))
-    sample_barcode_file = Column(String(13))
-    swabs_per_kit = Column(BIGINT, nullable=False)
-    print_results = Column(BOOLEAN, default=False)
+    barcode = Column(String(9), ForeignKey('barcodes.barcode.barcode'),
+                     primary_key=True, nullable=False, unique=True)
 
 
 class Login(Base):
     __tablename__ = 'login'
     __table_args__ = {'schema': 'ag'}
 
-    id = Column(UUID, default=func.uuid_generate_v4(), primary_key=True)
+    id = Column(UUID, server_default=text("uuid_generate_v4()"),
+                primary_key=True)
     email = Column(String(100))
     name = Column(String(200))
     address = Column(String(500))
@@ -163,8 +205,13 @@ class Login(Base):
     consents = relationship('Consent', backref='login')
 
     @classmethod
+    def get_all(cls):
+        return session.query(Login).order_by(Login.id)
+
+    @classmethod
     def search(cls, search_str):
-        cls.query.filter(????).all()
+        cls.query.filter(or_(cls.name.like('%%s%' % search_str),
+                             cls.email.like('%%s%' % search_str)))
 
 
 class Consent(Base):
@@ -172,7 +219,7 @@ class Consent(Base):
     __table_args__ = {'schema': 'ag'}
 
     login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False,
-                         primary_key=True)
+                      primary_key=True)
     participant_name = Column(String(200), primary_key=True, nullable=False)
     participant_email = Column(String(200), nullable=False)
     is_juvenile = Column(BOOLEAN)
@@ -182,6 +229,26 @@ class Consent(Base):
     date_signed = Column(DATE, default=func.now(), nullable=False)
     assent_obtainer = Column(String(200))
     age_range = Column(String(20))
+
+    @classmethod
+    def get_all(cls):
+        return session.query(Consent).order_by(Consent.login_id)
+
+
+# ---------- HELPER CLASSES ----------
+
+class Zipcode(Base):
+    __tablename__ = 'zipcode'
+    __table_args__ = {'schema': 'ag'}
+
+    zipcode = Column(String(200), primary_key=True, nullable=False)
+    state = Column(String(200))
+    fips_regions = Column(String())
+    city = Column(String(200))
+    latitude = Column(FLOAT)
+    longitude = Column(FLOAT)
+    elevation = Column(FLOAT)
+    cannot_geocode = Column(BOOLEAN)
 
 # ---------- BUILD THE TABLES AND ORM ----------
 
