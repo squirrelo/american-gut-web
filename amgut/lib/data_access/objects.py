@@ -19,7 +19,23 @@ event.listen(Base.metadata, 'before_create', DDL(
     'CREATE SCHEMA IF NOT EXISTS barcodes'))
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'))
+# add conditional foreign key restraint type trigger on survey response table
+event.listen(Base.metadata, 'after_create', DDL(
+    """CREATE OR REPLACE FUNCTION check_resp_func() RETURNS TRIGGER AS $BODY$
+BEGIN
+    IF (SELECT NOT EXISTS(SELECT answer FROM ag.survey_question_response
+    WHERE response = NEW.response)) THEN
+     RAISE EXCEPTION 'Unknown response: %', NEW.response
+     USING ERRCODE = 'CONSTRAINT';
+ END IF;
+END;
+$BODY$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS check_response ON ag.participant_responses;
+
+CREATE TRIGGER check_response
+BEFORE INSERT ON ag.participant_responses FOR EACH ROW
+WHEN (NEW.free_response = False) EXECUTE PROCEDURE check_resp_func();"""))
 
 # ---------- GENERIC BARCODE TABLES (barcodes schema) ----------
 
