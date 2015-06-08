@@ -20,7 +20,8 @@ event.listen(Base.metadata, 'before_create', DDL(
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'))
 
-# ---------- GENERIC BARCODE TABLES ----------
+
+# ---------- GENERIC BARCODE TABLES (barcodes schema) ----------
 
 
 class Barcode(Base):
@@ -89,12 +90,12 @@ class Project(Base):
         return session.query(Project).order_by(Project.id)
 
 
-# ---------- AG SPECIFIC TABLES ----------
+# ---------- AG SPECIFIC TABLES (ag schema) ----------
 class Kit(Base):
     __tablename__ = 'kit'
     __table_args__ = {'schema': 'ag'}
 
-    id = Column(UUID, server_default=text("uuid_generate_v4()"),
+    id = Column(UUID, server_default=text('uuid_generate_v4()'),
                 primary_key=True, unique=True)
     login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False)
     supplied_kit_id = Column(String(9), nullable=False)
@@ -148,7 +149,7 @@ class AGBarcode(Barcode):
     kit_id = Column(UUID, ForeignKey('ag.kit.id'), primary_key=True)
     barcode = Column(String(), ForeignKey('barcodes.barcode.barcode'),
                      primary_key=True, unique=True)
-    survey_id = Column(String(), ForeignKey('ag.login_surveys.survey_id'))
+    survey_id = Column(String(), ForeignKey('ag.participant_survey.id'))
     sample_barcode_file = Column(String(500))
     sample_barcode_file_md5 = Column(String(50))
     site_sampled = Column(String(200))
@@ -189,7 +190,7 @@ class Login(Base):
     __tablename__ = 'login'
     __table_args__ = {'schema': 'ag'}
 
-    id = Column(UUID, server_default=text("uuid_generate_v4()"),
+    id = Column(UUID, server_default=text('uuid_generate_v4()'),
                 primary_key=True)
     email = Column(String(100))
     name = Column(String(200))
@@ -235,9 +236,11 @@ class Consent(Base):
     def get_all(cls):
         return session.query(Consent).order_by(Consent.login_id)
 
+# ------------ AG SURVEY & RESPONSE TABLES ----------
 
-class Surveys(Base):
-    __tablename__ = 'survey'
+
+class ParticipantSurvey(Base):
+    __tablename__ = 'participant_survey'
     __table_args__ = {'schema': 'ag'}
 
     id = Column(String(), nullable=False, primary_key=True)
@@ -248,7 +251,82 @@ class Surveys(Base):
     orig_version = Column(Integer, nullable=False)
 
 
-# ---------- HELPER CLASSES ----------
+questions_association_table = Table(
+    'group_questions', Base.metadata,
+    Column('survey_group_id', Integer, ForeignKey('ag.survey_group.id'),
+           nullable=False, primary_key=True),
+    Column('survey_question_id', Integer, ForeignKey('ag.survey_question.id'),
+           nullable=False, primary_key=True),
+    Column('display_index', Integer, nullable=False, primary_key=True),
+    schema='ag')
+
+
+class SurveyGroup(Base):
+    __tablename__ = 'survey_group'
+    __table_args__ = {'schema': 'ag'}
+
+    id = Column(Integer, nullable=False, primary_key=True)
+    american = Column(String(), nullable=False, unique=True)
+    british = Column(String(), nullable=False, unique=True)
+    display_index = Column(Integer, nullable=False)
+    questions = relationship('Question', secondary=questions_association_table,
+                             backref='groups', order_by='display_index')
+
+responses_association_table = Table(
+    'survey_question_response', Base.metadata,
+    Column('survey_question_id', Integer, ForeignKey('ag.survey_question.id'),
+           nullable=False, primary_key=True, unique=True),
+    Column('response', String(), ForeignKey('ag.survey_response.american'),
+           nullable=False, primary_key=True, unique=True),
+    Column('display_index', Integer, nullable=False, primary_key=True),
+    schema='ag')
+
+class Question(Base):
+    __tablename__ = 'survey_question'
+    __table_args__ = {'schema': 'ag'}
+
+    id = Column(BIGINT, nullable=False, unique=True, primary_key=True)
+    question_shortname = Column(String(100), nullable=False, unique=True,
+                                default='TODO')
+    american = Column(String(), nullable=False, unique=True)
+    british = Column(String(), unique=True)
+    responses = relationship('Response', secondary=responses_association_table,
+                             backref='questions', order_by='display_index')
+
+class Response(Base):
+    __tablename__ = 'survey_response'
+    __table_args__ = {'schema': 'ag'}
+
+    american = Column(String(), nullable=False, unique=True, primary_key=True)
+    british = Column(String(), unique=True)
+
+
+class Survey(Base):
+    __tablename__ = 'surveys'
+    __table_args__ = {'schema': 'ag'}
+
+    id = Column(Integer, nullable=False, primary_key=True)
+    survey_group = Column(Integer, ForeignKey('ag.survey_group.id'),
+                          nullable=False, primary_key=True)
+    groups = relationship('SurveyGroup', secondary=SurveyGroup,
+                          backref='surveys', order_by='display_index')
+
+
+class ParticipantResponse(Base):
+    __tablename__ = 'participant_responses'
+    __table_args__ = {'schema': 'ag'}
+
+    survey_id = Column(String(), ForeignKey('ag.participant_survey.id'),
+                       nullable=False, primary_key=True)
+    survey_question_id = Column(
+        String(), ForeignKey('ag.survey_question_response.response'),
+        nullable=False, primary_key=True)
+    response = Column(String(), nullable=False)
+    free_response = Column(BOOLEAN, nullable=False, default=False)
+    responses = relationship('Response')
+
+
+# ---------- HELPER TABLES ----------
 
 class Zipcode(Base):
     __tablename__ = 'zipcode'
