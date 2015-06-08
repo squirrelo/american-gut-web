@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, event, DDL, Column, Table, ForeignKey, tex
 from sqlalchemy.orm import Session, relationship
 from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import or_, and_
-from sqlalchemy.types import String, DateTime
+from sqlalchemy.types import String, DateTime, Integer
 from sqlalchemy.dialects.postgresql import (
     UUID, FLOAT, BOOLEAN, BIGINT, ENUM, DATE)
 
@@ -96,7 +96,7 @@ class Kit(Base):
 
     id = Column(UUID, server_default=text("uuid_generate_v4()"),
                 primary_key=True, unique=True)
-    ag_login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False)
+    login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False)
     supplied_kit_id = Column(String(9), nullable=False)
     kit_password = Column(String(50))
     swabs_per_kit = Column(BIGINT, nullable=False)
@@ -116,6 +116,7 @@ class Kit(Base):
     @classmethod
     def search_skid(cls, search_str):
         cls.query.filter(cls.supplied_kit_id.like('%%s%' % search_str))
+
 
 class HandoutKit(Base):
     __tablename__ = 'handout_kit'
@@ -147,7 +148,7 @@ class AGBarcode(Barcode):
     kit_id = Column(UUID, ForeignKey('ag.kit.id'), primary_key=True)
     barcode = Column(String(), ForeignKey('barcodes.barcode.barcode'),
                      primary_key=True, unique=True)
-    survey_id = Column(String())
+    survey_id = Column(String(), ForeignKey('ag.login_surveys.survey_id'))
     sample_barcode_file = Column(String(500))
     sample_barcode_file_md5 = Column(String(50))
     site_sampled = Column(String(200))
@@ -233,6 +234,18 @@ class Consent(Base):
     @classmethod
     def get_all(cls):
         return session.query(Consent).order_by(Consent.login_id)
+
+
+class Surveys(Base):
+    __tablename__ = 'survey'
+    __table_args__ = {'schema': 'ag'}
+
+    id = Column(String(), nullable=False, primary_key=True)
+    ag_login_id = Column(UUID, ForeignKey('ag.login.id'), nullable=False)
+    participant_name = Column(String())
+    vioscreen_status = Column(Integer)
+    barcodes = relationship(Barcode, backref='survey')
+    orig_version = Column(Integer, nullable=False)
 
 
 # ---------- HELPER CLASSES ----------
