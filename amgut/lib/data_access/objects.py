@@ -297,6 +297,16 @@ responses_association_table = Table(
     Column('display_index', Integer, nullable=False, primary_key=True),
     schema='ag')
 
+triggers_table = Table(
+    'survey_question_triggers', Base.metadata,
+    Column('survey_question_id', BIGINT, ForeignKey('ag.survey_question.id'),
+           nullable=False),
+    Column('triggering_response', String(),
+           ForeignKey('ag.survey_response.american'), nullable=False),
+    Column('triggered_question ', BIGINT, ForeignKey('ag.survey_question.id'),
+           nullable=False))
+
+
 class Question(Base):
     __tablename__ = 'survey_question'
     __table_args__ = {'schema': 'ag'}
@@ -308,6 +318,14 @@ class Question(Base):
     british = Column(String(), unique=True)
     responses = relationship('Response', secondary=responses_association_table,
                              backref='questions', order_by='display_index')
+
+    @property
+    def triggers(self):
+        {tr: q for tr, q in session.query(
+            triggers_table.triggering_response, Question).filter(and_(
+                Question.survey_question_id == self.id,
+                triggers_table.survey_question_id == Question.survey_question_id))}
+
 
 class Response(Base):
     __tablename__ = 'survey_response'
