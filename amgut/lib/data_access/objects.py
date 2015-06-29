@@ -2,24 +2,27 @@
 from __future__ import division
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, event, DDL, Column, Table, ForeignKey, text
+from sqlalchemy import (
+    create_engine, event, DDL, Column, Table, ForeignKey, text)
 from sqlalchemy.orm import Session, relationship
 from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import or_, and_
-from sqlalchemy.types import String, DateTime, Integer
+from sqlalchemy.types import String, DateTime, Date, Integer
 from sqlalchemy.dialects.postgresql import (
     UUID, FLOAT, BOOLEAN, BIGINT, ENUM, DATE)
 
 from amgut.lib.config_manager import AMGUT_CONFIG
 
 Base = declarative_base()
+# Create the two schemas needed for the tables
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE SCHEMA IF NOT EXISTS ag'))
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE SCHEMA IF NOT EXISTS barcodes'))
+# Add UUID extension for the database
 event.listen(Base.metadata, 'before_create', DDL(
     'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'))
-# add conditional foreign key restraint type trigger on survey response table
+# Add conditional foreign key restraint type trigger on survey response table
 event.listen(Base.metadata, 'after_create', DDL(
     """CREATE OR REPLACE FUNCTION check_resp_func() RETURNS TRIGGER AS $BODY$
 BEGIN
@@ -37,9 +40,8 @@ CREATE TRIGGER check_response
 BEFORE INSERT ON ag.participant_responses FOR EACH ROW
 WHEN (NEW.free_response = False) EXECUTE PROCEDURE check_resp_func();"""))
 
+
 # ---------- GENERIC BARCODE TABLES (barcodes schema) ----------
-
-
 class Barcode(Base):
     __tablename__ = 'barcode'
     __table_args__ = {'schema': 'barcodes'}
@@ -123,6 +125,7 @@ class Kit(Base):
     pass_reset_code = Column(String(20))
     pass_reset_time = Column(DateTime())
     print_results = Column(BOOLEAN, default=False)
+    register_date = Column(DateTime)
     barcodes = relationship('AGBarcode', backref='kit')
     consents = relationship('Consent', backref='kit')
 
@@ -145,7 +148,9 @@ class HandoutKit(Base):
     sample_barcode_file = Column(String(13))
     swabs_per_kit = Column(BIGINT, nullable=False)
     print_results = Column(BOOLEAN, default=False)
-    barcodes = relationship('HandoutBarcode', backref='kit')
+    generated_date = Column(DateTime)
+    barcodes = relationship('HandoutBarcode', backref='kit',
+                            cascade="all, delete-orphan")
 
     @classmethod
     def get_all(cls):
@@ -169,7 +174,9 @@ class AGBarcode(Barcode):
     sample_barcode_file = Column(String(500))
     sample_barcode_file_md5 = Column(String(50))
     site_sampled = Column(String(200))
-    sample_date = Column(String(20))
+    sample_date = Column(DateTime)
+    post_date = Column(Date)
+    recieved_date = Column(DateTime)
     participant_name = Column(String(200))
     sample_time = Column(String(100))
     notes = Column(String(2000))
@@ -231,6 +238,12 @@ class Login(Base):
         cls.query.filter(or_(cls.name.like('%%s%' % search_str),
                              cls.email.like('%%s%' % search_str)))
 
+    def all_barcodes(self):
+        pass
+
+    def unlogged_barcodes(self):
+        pass
+
 
 class Consent(Base):
     __tablename__ = 'consent'
@@ -252,9 +265,8 @@ class Consent(Base):
     def get_all(cls):
         return session.query(Consent).order_by(Consent.login_id)
 
+
 # ------------ AG SURVEY & RESPONSE TABLES ----------
-
-
 class ParticipantSurvey(Base):
     __tablename__ = 'participant_survey'
     __table_args__ = {'schema': 'ag'}
@@ -322,9 +334,10 @@ class Question(Base):
     @property
     def triggers(self):
         {tr: q for tr, q in session.query(
-            triggers_table.triggering_response, Question).filter(and_(
-                Question.survey_question_id == self.id,
-                triggers_table.survey_question_id == Question.survey_question_id))}
+            triggers_table.triggering_response, Question).filter(
+            and_(Question.survey_question_id == self.id,
+                 triggers_table.survey_question_id ==
+                 Question.survey_question_id))}
 
 
 class Response(Base):
@@ -361,7 +374,6 @@ class ParticipantResponse(Base):
 
 
 # ---------- HELPER TABLES ----------
-
 class Zipcode(Base):
     __tablename__ = 'zipcode'
     __table_args__ = {'schema': 'ag'}
@@ -376,7 +388,6 @@ class Zipcode(Base):
     cannot_geocode = Column(BOOLEAN)
 
 # ---------- BUILD THE TABLES AND ORM ----------
-
 engine = create_engine('postgresql://%s:%s@%s:%d/%s' %
                        (AMGUT_CONFIG.user, AMGUT_CONFIG.password,
                         AMGUT_CONFIG.host, AMGUT_CONFIG.port,
