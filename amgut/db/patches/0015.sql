@@ -1,0 +1,3 @@
+GRANT USAGE ON SCHEMA barcodes TO "ag_wwwuser";
+GRANT INSERT, UPDATE, DELETE, SELECT ON ALL TABLES IN SCHEMA barcodes TO "ag_wwwuser";
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA barcodes TO "ag_wwwuser";

@@ -178,12 +178,12 @@ def build_and_initialize(verbose=False):
     if not cur.fetchone()[0]:
         cur.execute('CREATE USER "ag_wwwuser"')
 
-    cur.execute('GRANT USAGE ON schema public, ag TO "ag_wwwuser"')
+    cur.execute('GRANT USAGE ON schema public, ag, barcodes TO "ag_wwwuser"')
     cur.execute('GRANT CONNECT ON DATABASE %s TO "ag_wwwuser"' %
                 AMGUT_CONFIG.database)
     cur.execute('GRANT INSERT, UPDATE, DELETE, SELECT ON ALL TABLES IN SCHEMA'
-                ' public, ag TO "ag_wwwuser";')
-    cur.execute('GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public, ag TO '
+                ' public, ag, barcodes TO "ag_wwwuser";')
+    cur.execute('GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public, ag, barcodes TO '
                 '"ag_wwwuser";')
     conn.commit()
 
