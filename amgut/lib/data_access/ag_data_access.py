@@ -344,9 +344,17 @@ class AGDataAccess(object):
         hard to hack the function when you would need to know someone else's
         login id (a GUID) to delete something maliciously
         """
-        self.get_cursor().callproc('ag_delete_sample',
-                                   [barcode, ag_login_id])
-        self.connection.commit()
+        sql = """UPDATE  ag_kit_barcodes
+                 SET participant_name = NULL, site_sampled = NULL, sample_time = NULL,
+                        sample_date = NULL, environment_sampled = NULL, notes = ''
+                 WHERE barcode in
+                        (SELECT  barcode FROM ag_kit_barcodes
+                         INNER JOIN ag_kit USING (ag_kit_id)
+                         WHERE ag_login_id = %s AND barcode = %s)"""
+        self._sql.execute(sql, [ag_login_id, barcode])
+
+        sql = "UPDATE barcode set status = '' where barcode = %s"
+        self._sql.execute(sql, [barcode])
 
     def getHumanParticipants(self, ag_login_id):
         conn_handler = SQLConnectionHandler()
