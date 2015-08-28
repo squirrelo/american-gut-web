@@ -237,9 +237,17 @@ class AGDataAccess(object):
 
     def deleteAGParticipantSurvey(self, ag_login_id, participant_name):
         # Remove user using old stype DB Schema
-        self.get_cursor().callproc('ag_delete_participant',
-                                   [ag_login_id, participant_name])
-        self.connection.commit()
+        sql = """DELETE FROM ag.ag_consent WHERE survey_id = (
+                     SELECT survey_id FROM ag.ag_login_surveys WHERE ag_login_id = %(lid)s AND participant_name = %(pn)s);
+                 DELETE FROM ag.survey_answers WHERE survey_id = (
+                     SELECT survey_id FROM ag.ag_login_surveys WHERE ag_login_id = %(lid)s AND participant_name = %(pn)s);
+                 DELETE FROM ag.survey_answers_other WHERE survey_id = (
+                     SELECT survey_id FROM ag.ag_login_surveys WHERE ag_login_id = %(lid)s AND participant_name = %(pn)s);
+                 DELETE FROM ag.promoted_survey_ids WHERE survey_id = (
+                     SELECT survey_id FROM ag.ag_login_surveys WHERE ag_login_id = %(lid)s AND participant_name = %(pn)s);
+                 DELETE FROM ag.ag_login_surveys WHERE ag_login_id = %(lid)s AND participant_name = %(pn)s;
+             """
+        self._sql.execute(sql, {'lid': ag_login_id, 'pn': participant_name})
 
         # Remove user from new schema
         conn_handler = SQLConnectionHandler()
