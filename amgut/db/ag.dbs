@@ -851,6 +851,32 @@
 				<column name="company" />
 			</index>
 		</table>
+		<table name="instrument_settings" >
+			<column name="instrument_settings_id" type="bigserial" jt="-5" mandatory="y" />
+			<column name="instrument_type" type="varchar" jt="12" mandatory="y" />
+			<column name="instrument_settings" type="json" jt="12" >
+				<comment><![CDATA[form {setting: value, setting: value, ...}]]></comment>
+			</column>
+			<column name="created_on" type="timestamp" jt="93" mandatory="y" >
+				<defo>current_timestamp</defo>
+			</column>
+			<column name="person_id" type="bigint" jt="-5" mandatory="y" />
+			<index name="pk_instrument_settings" unique="PRIMARY_KEY" >
+				<column name="instrument_settings_id" />
+			</index>
+			<index name="idx_instrument_settings" unique="NORMAL" >
+				<column name="instrument_type" />
+			</index>
+			<index name="idx_instrument_settings_0" unique="NORMAL" >
+				<column name="person_id" />
+			</index>
+			<fk name="fk_instrument_settings" to_schema="barcodes" to_table="instrument_type" >
+				<fk_column name="instrument_type" pk="instrument_type" />
+			</fk>
+			<fk name="fk_instrument_settings_0" to_schema="barcodes" to_table="people" >
+				<fk_column name="person_id" pk="person_id" />
+			</fk>
+		</table>
 		<table name="instrument_type" >
 			<column name="instrument_type" type="varchar" jt="12" mandatory="y" />
 			<column name="description" type="varchar" jt="12" mandatory="y" />
@@ -1498,6 +1524,7 @@
 		<table name="steps_instruments" >
 			<column name="step_id" type="bigint" jt="-5" mandatory="y" />
 			<column name="instrument_type" type="varchar" jt="12" mandatory="y" />
+			<column name="instrument_settings_id" type="bigint" jt="-5" />
 			<index name="idx_steps_instruments" unique="NORMAL" >
 				<column name="instrument_type" />
 			</index>
@@ -1505,11 +1532,17 @@
 				<column name="step_id" />
 				<column name="instrument_type" />
 			</index>
+			<index name="idx_steps_instruments_1" unique="NORMAL" >
+				<column name="instrument_settings_id" />
+			</index>
 			<fk name="fk_steps_instruments" to_schema="barcodes" to_table="steps" >
 				<fk_column name="step_id" pk="step_id" />
 			</fk>
 			<fk name="fk_steps_instruments_0" to_schema="barcodes" to_table="instrument_type" >
 				<fk_column name="instrument_type" pk="instrument_type" />
+			</fk>
+			<fk name="fk_steps_instruments_1" to_schema="barcodes" to_table="instrument_settings" >
+				<fk_column name="instrument_settings_id" pk="instrument_settings_id" />
 			</fk>
 		</table>
 		<table name="steps_peripherals" >
@@ -23351,12 +23384,9 @@ CREATE INDEX idx_duplicate_consents_0 ON ag.duplicate_consents ( main_survey_id 
 		<entity schema="barcodes" name="people" color="b7c8e3" x="645" y="450" />
 		<entity schema="barcodes" name="barcode_exceptions" color="b7c8e3" x="360" y="45" />
 		<entity schema="barcodes" name="barcode" color="b7c8e3" x="45" y="75" />
-		<entity schema="barcodes" name="users" color="b7c8e3" x="855" y="450" />
-		<entity schema="barcodes" name="steps_instruments" color="b7c8e3" x="645" y="750" />
 		<entity schema="barcodes" name="companies" color="b7c8e3" x="105" y="795" />
 		<entity schema="barcodes" name="steps_reagents" color="b7c8e3" x="645" y="660" />
 		<entity schema="barcodes" name="reagents" color="b7c8e3" x="375" y="480" />
-		<entity schema="barcodes" name="steps_peripherals" color="b7c8e3" x="645" y="840" />
 		<entity schema="barcodes" name="steps" color="b7c8e3" x="885" y="690" />
 		<entity schema="barcodes" name="step_settings" color="b7c8e3" x="1200" y="720" />
 		<entity schema="barcodes" name="settings_reagents" color="b7c8e3" x="1200" y="810" />
@@ -23367,15 +23397,14 @@ CREATE INDEX idx_duplicate_consents_0 ON ag.duplicate_consents ( main_survey_id 
 		<entity schema="barcodes" name="instrument_type" color="b7c8e3" x="120" y="930" />
 		<entity schema="barcodes" name="instruments" color="b7c8e3" x="390" y="930" />
 		<entity schema="barcodes" name="instruments_reagents" color="b7c8e3" x="315" y="810" />
-		<entity schema="barcodes" name="primers" color="b7c8e3" x="210" y="1290" />
+		<entity schema="barcodes" name="primers" color="b7c8e3" x="210" y="1425" />
 		<entity schema="barcodes" name="peripheral_type" color="b7c8e3" x="120" y="1110" />
 		<entity schema="barcodes" name="reagent_type" color="b7c8e3" x="165" y="495" />
 		<entity schema="barcodes" name="project" color="b7c8e3" x="105" y="285" />
-		<entity schema="barcodes" name="primers_lots" color="b7c8e3" x="405" y="1290" />
+		<entity schema="barcodes" name="primers_lots" color="b7c8e3" x="405" y="1425" />
 		<entity schema="barcodes" name="pool" color="b7c8e3" x="1320" y="105" />
 		<entity schema="barcodes" name="run" color="b7c8e3" x="1320" y="270" />
 		<entity schema="barcodes" name="project_barcode" color="b7c8e3" x="135" y="195" />
-		<entity schema="barcodes" name="peripherals" color="b7c8e3" x="390" y="1110" />
 		<entity schema="barcodes" name="protocol_settings" color="b7c8e3" x="1185" y="540" />
 		<entity schema="barcodes" name="settings_primers" color="b7c8e3" x="1200" y="1065" />
 		<entity schema="barcodes" name="protocols" color="b7c8e3" x="885" y="930" />
@@ -23384,6 +23413,11 @@ CREATE INDEX idx_duplicate_consents_0 ON ag.duplicate_consents ( main_survey_id 
 		<entity schema="barcodes" name="plates" color="b7c8e3" x="870" y="165" />
 		<entity schema="barcodes" name="samples" color="b7c8e3" x="360" y="180" />
 		<entity schema="barcodes" name="plates_samples" color="b7c8e3" x="645" y="165" />
+		<entity schema="barcodes" name="peripherals" color="b7c8e3" x="390" y="1110" />
+		<entity schema="barcodes" name="steps_peripherals" color="b7c8e3" x="645" y="840" />
+		<entity schema="barcodes" name="users" color="b7c8e3" x="855" y="450" />
+		<entity schema="barcodes" name="steps_instruments" color="b7c8e3" x="645" y="750" />
+		<entity schema="barcodes" name="instrument_settings" color="b7c8e3" x="345" y="1245" />
 		<group name="Group_samples" color="c4e0f9" >
 			<entity schema="barcodes" name="plates_samples" />
 			<entity schema="barcodes" name="plates" />
@@ -23394,6 +23428,7 @@ CREATE INDEX idx_duplicate_consents_0 ON ag.duplicate_consents ( main_survey_id 
 			<entity schema="barcodes" name="peripherals" />
 			<entity schema="barcodes" name="instrument_type" />
 			<entity schema="barcodes" name="peripheral_type" />
+			<entity schema="barcodes" name="instrument_settings" />
 		</group>
 		<group name="Group_reagents" color="99ff99" >
 			<entity schema="barcodes" name="reagents" />
